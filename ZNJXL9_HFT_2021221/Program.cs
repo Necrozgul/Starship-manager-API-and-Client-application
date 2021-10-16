@@ -27,9 +27,9 @@ namespace ZNJXL9_HFT_2021221
             //Működik
             StarshipRepository s = new StarshipRepository(x);
             //s.Delete(1);
-            s.Create("Probaname", 20, 1,1);
-            //s.Update("Probaupdated",);
-            
+            s.Create("Probaname", 20, 1,1);//7id
+            StarshipNameWithBrandName.ToConsole("starships");
+            s.Update("Proba", 7, 20, 1, 1);
 
             StarshipNameWithBrandName.ToConsole("starships");
         }

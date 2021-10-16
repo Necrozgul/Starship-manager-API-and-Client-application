@@ -18,5 +18,6 @@ namespace ZNJXL9_HFT_2021221.Client
             Console.WriteLine("*** END " + str);
             Console.ReadLine();
         }
+        
     }
 }

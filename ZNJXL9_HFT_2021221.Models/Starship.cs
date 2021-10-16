@@ -33,7 +33,7 @@ namespace ZNJXL9_HFT_2021221.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         // Part 1
         [Column("starship_id", TypeName = "int")]
-        // Part 2 auto key increment
+        //Part 2 auto key increment
         //[Column("car_id", TypeName = "int", Order = 0)]
         public int Id { get; set; }
 
@@ -41,14 +41,8 @@ namespace ZNJXL9_HFT_2021221.Data
         [Required]
         public string Model { get; set; }
 
-        //[MaxLength(100)]
-        //[Required]
-        //public string Weapon { get; set; }
-
         public int? BasePrice { get; set; }
 
-        // Proxy class
-        // Lazy loading
         [NotMapped]
         public virtual Brand Brand { get; set; }
 
