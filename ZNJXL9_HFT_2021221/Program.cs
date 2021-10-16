@@ -17,21 +17,23 @@ namespace ZNJXL9_HFT_2021221
 
 
 
-            var StarshipNameWithBrandName = from starship in x.Starships
+            var StarshipFullData = from starship in x.Starships
                                             join brand in x.Brand
                                             on starship.BrandId equals brand.Id
-                                            select new { Model = starship.Model, Brand = brand.Name };
-            StarshipNameWithBrandName.ToConsole("starships");
+                                            join weapon in x.Weapon
+                                            on starship.WeaponId equals weapon.Id
+                                            select new { Model = starship.Model, Id = starship.Id , Brand = brand.Name, Weapon = weapon.Name };
+            StarshipFullData.ToConsole("starships");
 
             //x.StarshipNameChange(x, 1, "Probaname");
             //Működik
             StarshipRepository s = new StarshipRepository(x);
             //s.Delete(1);
             s.Create("Probaname", 20, 1,1);//7id
-            StarshipNameWithBrandName.ToConsole("starships");
-            s.Update("Proba", 7, 20, 1, 1);
+            StarshipFullData.ToConsole("starships");
+            s.Update("Proba", 7, 20, 2, 2);
 
-            StarshipNameWithBrandName.ToConsole("starships");
+            StarshipFullData.ToConsole("starships");
         }
     }
 }

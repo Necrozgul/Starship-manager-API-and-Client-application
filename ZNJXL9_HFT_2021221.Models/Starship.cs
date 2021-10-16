@@ -55,5 +55,10 @@ namespace ZNJXL9_HFT_2021221.Data
 
         [ForeignKey(nameof(Weapon))]
         public int WeaponId { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{Id}]{Model} - {Brand}, {Weapon}";
+        }
     }
 }
