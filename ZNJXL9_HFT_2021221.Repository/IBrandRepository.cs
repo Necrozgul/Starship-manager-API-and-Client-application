@@ -11,6 +11,6 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         void Update(int id, string name);
         void Delete(int id);
-        void Create(int id, string name);
+        void Create(string name);
     }
 }

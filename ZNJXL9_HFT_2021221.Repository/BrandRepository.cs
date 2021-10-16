@@ -45,9 +45,15 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public void Create(int id, string name)
+        public void Create(string name)
         {
-            throw new NotImplementedException();
+            var context = new XYZDbContext();
+            var s = new Brand
+            {
+                Name = name
+            };
+            context.Add(s);
+            context.SaveChanges();
         }
     }
 }
