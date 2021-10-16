@@ -6,9 +6,9 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IRepository<T> where T : class
     {
-        T GetOne(int id);
+        T Read(int id);
 
-        IQueryable<T> GetAll();
+        IQueryable<T> ReadAll();
 
         // NOTE: not full CRUD, insert remove update TODO
     }

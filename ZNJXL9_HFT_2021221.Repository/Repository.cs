@@ -19,12 +19,12 @@ namespace ZNJXL9_HFT_2021221.Repository
             this.ctx = ctx;
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> ReadAll()
         {
             return ctx.Set<T>();
         }
 
-        public abstract T GetOne(int id);
+        public abstract T Read(int id);
     }
 
     

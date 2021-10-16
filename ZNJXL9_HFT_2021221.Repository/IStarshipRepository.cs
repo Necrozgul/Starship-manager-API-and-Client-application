@@ -11,7 +11,7 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         void Update(string modelName, int id, int newPrice);
         void Delete(int id);
-        void Create(string modelName, int id, int newPrice);
+        void Create(string modelName, int newPrice, int brandid, int weaponid);
     }
 
 }

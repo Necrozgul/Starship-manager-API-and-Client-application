@@ -14,14 +14,15 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public StarshipRepository(DbContext ctx) : base(ctx) { }
 
-        public override Starship GetOne(int id)
+        public override Starship Read(int id)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            return ReadAll().SingleOrDefault(x => x.Id == id);
         }
+        
 
         public void Update(string modelName, int id, int newPrice, int weaponid, int Brandid)
         {
-            var s = GetOne(id);
+            var s = Read(id);
             if (s == null)
             {
                 throw new InvalidOperationException(
@@ -37,7 +38,7 @@ namespace ZNJXL9_HFT_2021221.Repository
         
         public void Delete(int id)
         {
-            var x = GetOne(id);
+            var x = Read(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
@@ -47,9 +48,24 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.Remove(x);
             ctx.SaveChanges();
         }
-        public void Create(string modelName, int id, int newPrice, int weaponid)
+        public void Create(string modelName, int newPrice, int brandid, int weaponid)
+        {
+            var context = new XYZDbContext();
+            var s = new Starship
+            {
+                Model = modelName,
+                BasePrice = newPrice,
+                WeaponId = weaponid,
+                BrandId = brandid
+            };
+            context.Add(s);
+            context.SaveChanges();
+        }
+
+        public void Update(string modelName, int id, int newPrice)
         {
             throw new NotImplementedException();
         }
+
     }
 }
