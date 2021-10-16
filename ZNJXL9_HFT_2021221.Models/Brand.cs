@@ -23,7 +23,6 @@ namespace ZNJXL9_HFT_2021221.Data
 
         [NotMapped]
         public virtual ICollection<Starship> Starships { get; set; }
-        // IEnumerable, ICollection, IList, IDictionary
 
         public Brand()
         {

@@ -12,7 +12,6 @@ namespace ZNJXL9_HFT_2021221
         {
             Console.WriteLine("ProbaKiiratas:");
             XYZDbContext x = new XYZDbContext();
-            Console.WriteLine(x.Starships.Count());
 
 
 
@@ -26,7 +25,7 @@ namespace ZNJXL9_HFT_2021221
 
             var brandData = from brand in x.Brand select new { Id = brand.Id, Name = brand.Name };
 
-            var weaponData = from brand in x.Brand select new { Id = brand.Id, Name = brand.Name };
+            var weaponData = from weapon in x.Weapon select new { Id = weapon.Id, Name = weapon.Name };
 
 
             starshipData.ToConsole("starships");
@@ -37,14 +36,6 @@ namespace ZNJXL9_HFT_2021221
             BrandRepository b = new BrandRepository(x);
             WeaponRepository w = new WeaponRepository(x);
 
-
-            //Hbás a weapon CRUD
-            w.Create("Test1");
-            
-            weaponData.ToConsole("weapon");
-            w.Update(1,"Testupdated");
-            weaponData.ToConsole("weapon");
-            //w.Delete(4);
 
 
 

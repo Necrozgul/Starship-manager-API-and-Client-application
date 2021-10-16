@@ -30,8 +30,5 @@ namespace ZNJXL9_HFT_2021221.Data
         {
             Starships = new HashSet<Starship>();
         }
-
-
-
     }
 }
