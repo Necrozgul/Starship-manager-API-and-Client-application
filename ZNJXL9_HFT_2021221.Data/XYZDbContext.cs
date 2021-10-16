@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZNJXL9_HFT_2021221.Data
 {
-    public partial class StarshipDbContext : DbContext
+    public partial class XYZDbContext : DbContext
     {
         //Help with writing modify
         //https://www.learnentityframeworkcore.com/dbcontext/modifying-data
@@ -17,13 +17,13 @@ namespace ZNJXL9_HFT_2021221.Data
         public virtual DbSet<Starship> Starships { get; set; }
 
 
-        public StarshipDbContext()
+        public XYZDbContext()
         {
             // creating the neccessary elements to get the database
             this.Database.EnsureCreated();
         }
 
-        public StarshipDbContext(DbContextOptions<StarshipDbContext> options)
+        public XYZDbContext(DbContextOptions<XYZDbContext> options)
             : base(options)
         {
         }
