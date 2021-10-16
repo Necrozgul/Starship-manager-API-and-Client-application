@@ -9,7 +9,9 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IStarshipRepository : IRepository<Starship>
     {
-        void ChangePrice(int id, int newPrice);
+        void Update(string modelName, int id, int newPrice);
+        void Delete(int id);
+        void Create(string modelName, int id, int newPrice);
     }
 
 }

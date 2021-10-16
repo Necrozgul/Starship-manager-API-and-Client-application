@@ -8,6 +8,7 @@ using ZNJXL9_HFT_2021221.Data;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
+    //Crud: Create, Read, ReadAll, Update, Delete
     public class BrandRepository :
         Repository<Brand>, IBrandRepository
     {

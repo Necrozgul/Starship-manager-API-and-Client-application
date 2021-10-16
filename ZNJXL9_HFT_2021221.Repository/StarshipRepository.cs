@@ -8,6 +8,7 @@ using ZNJXL9_HFT_2021221.Data;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
+    //CRUD : Create, Read, ReadAll, Update, Delete
     public class StarshipRepository :
         Repository<Starship>, IStarshipRepository
     {
@@ -18,31 +19,22 @@ namespace ZNJXL9_HFT_2021221.Repository
             return GetAll().SingleOrDefault(x => x.Id == id);
         }
 
-        public void ChangePrice(int id, int newPrice)
+        public void Update(string modelName, int id, int newPrice, int weaponid, int Brandid)
         {
-            var car = GetOne(id);
-            if (car == null)
+            var s = GetOne(id);
+            if (s == null)
             {
                 throw new InvalidOperationException(
                     "Starship not found"
                 );
             }
-            car.BasePrice = newPrice;
-            // Unit of Work pattern ???
+            s.BasePrice = newPrice;
+            s.Model = modelName;
+            s.BrandId = Brandid;
+            s.WeaponId = weaponid;
             ctx.SaveChanges();
         }
-        public void ChangeName(int id, string newName)
-        {
-            var x = GetOne(id);
-            if (x == null)
-            {
-                throw new InvalidOperationException(
-                    "Starship not found"
-                );
-            }
-            x.Model = newName;
-            ctx.SaveChanges();
-        }
+        
         public void Delete(int id)
         {
             var x = GetOne(id);
@@ -55,9 +47,9 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.Remove(x);
             ctx.SaveChanges();
         }
-        public void Modify()
-        { 
-        
+        public void Create(string modelName, int id, int newPrice, int weaponid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
