@@ -35,10 +35,6 @@ namespace ZNJXL9_HFT_2021221
             StarshipRepository s = new StarshipRepository(x);
             BrandRepository b = new BrandRepository(x);
             WeaponRepository w = new WeaponRepository(x);
-
-
-
-
         }
     }
 }
