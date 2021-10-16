@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZNJXL9_HFT_2021221.Endpoint
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZNJXL9_HFT_2021221.Test", "ZNJXL9_HFT_2021221.Test\ZNJXL9_HFT_2021221.Test.csproj", "{CED0FDC2-E136-47D6-8EEE-BF9617F4BAA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{506F463A-CCFF-461B-A632-C68B8EC25EE6}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
