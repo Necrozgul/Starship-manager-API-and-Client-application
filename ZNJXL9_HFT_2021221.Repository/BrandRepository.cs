@@ -14,14 +14,14 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public BrandRepository(DbContext ctx) : base(ctx) { }
 
-        public override Brand GetOne(int id)
+        public override Brand Read(int id)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            return ReadAll().SingleOrDefault(x => x.Id == id);
         }
 
         public void ChangeName(int id, string newName)
         {
-            var s = GetOne(id);
+            var s = Read(id);
             if (s == null)
             {
                 throw new InvalidOperationException(

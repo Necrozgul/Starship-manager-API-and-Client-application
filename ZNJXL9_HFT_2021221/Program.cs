@@ -28,6 +28,7 @@ namespace ZNJXL9_HFT_2021221
             StarshipRepository s = new StarshipRepository(x);
             //s.Delete(1);
             s.Create("Probaname", 20, 1,1);
+            //s.Update("Probaupdated",);
             
 
             StarshipNameWithBrandName.ToConsole("starships");

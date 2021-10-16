@@ -13,14 +13,14 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public WeaponRepository(DbContext ctx) : base(ctx) { }
 
-        public override Weapon GetOne(int id)
+        public override Weapon Read(int id)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            return ReadAll().SingleOrDefault(x => x.Id == id);
         }
 
         public void ChangeName(int id, string newName)
         {
-            var car = GetOne(id);
+            var car = Read(id);
             if (car == null)
             {
                 throw new InvalidOperationException(

@@ -62,10 +62,5 @@ namespace ZNJXL9_HFT_2021221.Repository
             context.SaveChanges();
         }
 
-        public void Update(string modelName, int id, int newPrice)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
