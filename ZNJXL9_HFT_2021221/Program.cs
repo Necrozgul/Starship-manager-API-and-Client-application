@@ -31,7 +31,7 @@ namespace ZNJXL9_HFT_2021221
             //s.Delete(1);
             s.Create("Probaname", 20, 1,1);//7id
             StarshipFullData.ToConsole("starships");
-            s.Update("Proba", 7, 20, 2, 2);
+            s.Update(7,"Proba", 20, 2, 2);
 
             StarshipFullData.ToConsole("starships");
         }

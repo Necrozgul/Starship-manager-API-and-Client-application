@@ -20,7 +20,7 @@ namespace ZNJXL9_HFT_2021221.Repository
         }
         
 
-        public void Update(string modelName, int id, int newPrice, int weaponid, int Brandid)
+        public void Update(int id, string modelName, int newPrice, int weaponid, int Brandid)
         {
             var s = Read(id);
             if (s == null)

@@ -9,7 +9,8 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IBrandRepository : IRepository<Brand>
     {
-
-        void ChangeName(int id, string newName);
+        void Update(int id, string name);
+        void Delete(int id);
+        void Create(int id, string name);
     }
 }
