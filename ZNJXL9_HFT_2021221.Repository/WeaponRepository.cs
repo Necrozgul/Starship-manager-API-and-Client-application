@@ -18,18 +18,41 @@ namespace ZNJXL9_HFT_2021221.Repository
             return ReadAll().SingleOrDefault(x => x.Id == id);
         }
 
-        public void ChangeName(int id, string newName)
+        public void Update(int id, string name)
         {
-            var car = Read(id);
-            if (car == null)
+            var s = Read(id);
+            if (s == null)
             {
                 throw new InvalidOperationException(
-                    "Car not found"
+                    "Weapon not found"
                 );
             }
-            car.Name = newName;
-            // Unit of Work pattern ???
+            s.Name = name;
             ctx.SaveChanges();
         }
+
+        public void Delete(int id)
+        {
+            var x = Read(id);
+            if (x == null)
+            {
+                throw new InvalidOperationException(
+                    "Weapon not found"
+                );
+            }
+            ctx.Remove(x);
+            ctx.SaveChanges();
+        }
+
+        public void Create(string name)
+        {
+            var s = new Weapon
+            {
+                Name = name
+            };
+            ctx.Add(s);
+            ctx.SaveChanges();
+        }
+    
     }
 }

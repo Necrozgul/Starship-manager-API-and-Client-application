@@ -25,7 +25,7 @@ namespace ZNJXL9_HFT_2021221.Repository
             if (s == null)
             {
                 throw new InvalidOperationException(
-                    "Starship not found"
+                    "Brand not found"
                 );
             }
             s.Name = name;

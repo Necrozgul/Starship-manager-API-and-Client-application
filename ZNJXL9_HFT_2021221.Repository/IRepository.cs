@@ -9,10 +9,6 @@ namespace ZNJXL9_HFT_2021221.Repository
         T Read(int id);
 
         IQueryable<T> ReadAll();
-
-
-
-        // NOTE: not full CRUD, insert remove update TODO
     }
 
    
