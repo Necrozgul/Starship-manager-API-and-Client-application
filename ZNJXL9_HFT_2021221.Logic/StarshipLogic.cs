@@ -30,12 +30,19 @@ namespace ZNJXL9_HFT_2021221.Logic
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.BasePrice) ?? 0);
         }
-
-        public void Update(int id, Starship obj)
+        public Starship GetOne(int id)
         {
-            starshipRepository.Update(obj);
+            return starshipRepository.GetOne(id);
         }
 
+        IList<Starship> IStarshipLogic.GetAll()
+        {
+            return starshipRepository.GetAll().ToList();
+        }
+        public IList<Starship> GetAll()
+        {
+            return starshipRepository.GetAll().ToList();
+        }
         public void Create(Starship starship)
         {
             if (starship.BasePrice < 0)
@@ -44,12 +51,14 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
             starshipRepository.Create(starship);
         }
-
-        public IList<Starship> GetAll()
+        public void Update(Starship obj)
         {
-            return starshipRepository.GetAll().ToList();
+            starshipRepository.Update(obj);
         }
-
+        public void Delete(int id)
+        {
+            starshipRepository.Delete(id);
+        }
         public IList<AveragesResult> GetBrandAverages()
         {
             var q = from car in starshipRepository.GetAll()
@@ -62,16 +71,6 @@ namespace ZNJXL9_HFT_2021221.Logic
                         AveragePrice = grp.Average(x => x.BasePrice) ?? 0
                     };
             return q.ToList();
-        }
-
-        public Starship GetOne(int id)
-        {
-            return starshipRepository.GetOne(id);
-        }
-
-        IList<Starship> IStarshipLogic.GetAll()
-        {
-            return starshipRepository.GetAll().ToList();
-        }
+        }    
     }
 }

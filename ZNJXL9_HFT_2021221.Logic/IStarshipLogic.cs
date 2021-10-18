@@ -8,15 +8,18 @@ namespace ZNJXL9_HFT_2021221.Logic
     {
         Starship GetOne(int id);
 
-        void Update(int id, Starship obj);
-
         IList<Starship> GetAll();
+        void Create(Starship obj);
+        void Update(Starship obj);
+        void Delete(int id);
+
+        
 
         //IList<AveragesResult> GetBrandAverages();
 
         double AVGPrice();
 
-        void Create(Starship obj);
+        
 
         IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands();
     }
