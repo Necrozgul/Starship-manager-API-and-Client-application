@@ -47,17 +47,33 @@ namespace ZNJXL9_HFT_2021221.Logic
         {
             if (starship.BasePrice < 0)
             {
-                throw new ArgumentException("Negative price is not allowed");
+                throw new ErrorException("Negative price is not allowed");
             }
             starshipRepository.Create(starship);
         }
         public void Update(Starship obj)
         {
-            starshipRepository.Update(obj);
+            if (obj != null && obj.Model != "" && obj.BrandId != null && obj.WeaponId != null)
+            {
+                starshipRepository.Update(obj);
+            }
+            else
+            {
+                throw new ErrorException("Some Data is not valid");
+            }
+            
         }
         public void Delete(int id)
         {
-            starshipRepository.Delete(id);
+            if (starshipRepository.GetOne(id) != null)
+            {
+                starshipRepository.Delete(id);
+            }
+            else
+            {
+                throw new ErrorException("There is no Starship with thad id");
+            }
+            
         }
         public IList<AveragesResult> GetBrandAverages()
         {

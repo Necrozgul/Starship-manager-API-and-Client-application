@@ -33,14 +33,21 @@ namespace ZNJXL9_HFT_2021221
             //brandData.ToConsole("brands");
             //weaponData.ToConsole("weapons");
 
-            //x.StarshipNameChange(x, 1, "Probaname");
-            //Működik
             StarshipLogic s = new StarshipLogic(new StarshipRepository(x));
             BrandRepository b = new BrandRepository(x);
             WeaponRepository w = new WeaponRepository(x);
 
             s.Create(new Starship("Starshipcreatingwithnewmethod",2000,2,2));
             s.Update(new Starship(6,"StarshipcreatingwithnewmethodUpdated", 20000, 1, 1));
+            try
+            {
+                s.Delete(20);
+            }
+            catch (ErrorException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
             //s.Delete(7);
             starshipData.ToConsole("starships");
         }
