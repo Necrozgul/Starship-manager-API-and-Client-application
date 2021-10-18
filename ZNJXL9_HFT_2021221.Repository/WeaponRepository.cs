@@ -13,7 +13,7 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public WeaponRepository(DbContext ctx) : base(ctx) { }
 
-        public override Weapon Get(int id)
+        public override Weapon GetOne(int id)
         {
             return GetAll().SingleOrDefault(x => x.Id == id);
         }
@@ -26,7 +26,7 @@ namespace ZNJXL9_HFT_2021221.Repository
 
         public override void Delete(int id)
         {
-            var x = Get(id);
+            var x = GetOne(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
@@ -39,7 +39,7 @@ namespace ZNJXL9_HFT_2021221.Repository
 
         public override void Update(Weapon obj)
         {
-            var s = Get(obj.Id);
+            var s = GetOne(obj.Id);
             if (s == null)
             {
                 throw new InvalidOperationException(

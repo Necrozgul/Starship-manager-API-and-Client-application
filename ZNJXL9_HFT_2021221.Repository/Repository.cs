@@ -24,7 +24,7 @@ namespace ZNJXL9_HFT_2021221.Repository
             return ctx.Set<T>();
         }
 
-        public abstract T Get(int id);
+        public abstract T GetOne(int id);
 
         public abstract void Create(T obj);
 

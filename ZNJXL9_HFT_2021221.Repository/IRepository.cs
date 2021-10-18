@@ -6,7 +6,7 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IRepository<T> where T : class
     {
-        T Get(int id);
+        T GetOne(int id);
         IQueryable<T> GetAll();
 
         void Create(T obj);
