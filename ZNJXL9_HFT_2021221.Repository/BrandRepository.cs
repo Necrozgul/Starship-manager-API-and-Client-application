@@ -14,27 +14,19 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public BrandRepository(DbContext ctx) : base(ctx) { }
 
-        public override Brand Read(int id)
+        public override Brand Get(int id)
         {
-            return ReadAll().SingleOrDefault(x => x.Id == id);
+            return GetAll().SingleOrDefault(x => x.Id == id);
         }
-
-        public void Update(int id, string name)
+        public override void Create(Brand obj)
         {
-            var s = Read(id);
-            if (s == null)
-            {
-                throw new InvalidOperationException(
-                    "Brand not found"
-                );
-            }
-            s.Name = name;
+            ctx.Add(obj);
             ctx.SaveChanges();
         }
 
-        public void Delete(int id)
+        public override void Delete(int id)
         {
-            var x = Read(id);
+            var x = Get(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
@@ -45,15 +37,17 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public void Create(string name)
+        public override void Update(Brand obj)
         {
-            var context = new XYZDbContext();
-            var s = new Brand
+            var s = Get(obj.Id);
+            if (s == null)
             {
-                Name = name
-            };
-            context.Add(s);
-            context.SaveChanges();
+                throw new InvalidOperationException(
+                    "Brand not found"
+                );
+            }
+            s.Name = obj.Name;
+            ctx.SaveChanges();
         }
     }
 }

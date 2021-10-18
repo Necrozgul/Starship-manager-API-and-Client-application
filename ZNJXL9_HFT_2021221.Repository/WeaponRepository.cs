@@ -13,27 +13,20 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public WeaponRepository(DbContext ctx) : base(ctx) { }
 
-        public override Weapon Read(int id)
+        public override Weapon Get(int id)
         {
-            return ReadAll().SingleOrDefault(x => x.Id == id);
+            return GetAll().SingleOrDefault(x => x.Id == id);
         }
 
-        public void Update(int id, string name)
+        public override void Create(Weapon obj)
         {
-            var s = Read(id);
-            if (s == null)
-            {
-                throw new InvalidOperationException(
-                    "Weapon not found"
-                );
-            }
-            s.Name = name;
+            ctx.Add(obj);
             ctx.SaveChanges();
         }
 
-        public void Delete(int id)
+        public override void Delete(int id)
         {
-            var x = Read(id);
+            var x = Get(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
@@ -44,15 +37,18 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public void Create(string name)
+        public override void Update(Weapon obj)
         {
-            var s = new Weapon
+            var s = Get(obj.Id);
+            if (s == null)
             {
-                Name = name
-            };
-            ctx.Add(s);
+                throw new InvalidOperationException(
+                    "Weapon not found"
+                );
+            }
+            s.Name = obj.Name;
+            s.Id = obj.Id;
             ctx.SaveChanges();
         }
-    
     }
 }

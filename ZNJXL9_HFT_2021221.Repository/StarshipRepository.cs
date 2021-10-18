@@ -14,31 +14,28 @@ namespace ZNJXL9_HFT_2021221.Repository
     {
         public StarshipRepository(DbContext ctx) : base(ctx) { }
 
-        public override Starship Read(int id)
+        public override Starship Get(int id)
         {
-            return ReadAll().SingleOrDefault(x => x.Id == id);
+            return GetAll().SingleOrDefault(x => x.Id == id);
         }
-        
 
-        public void Update(int id, string modelName, int newPrice, int weaponid, int Brandid)
+        public override void Create(Starship obj)
         {
-            var s = Read(id);
-            if (s == null)
+            var context = new XYZDbContext();
+            var s = new Starship
             {
-                throw new InvalidOperationException(
-                    "Starship not found"
-                );
-            }
-            s.BasePrice = newPrice;
-            s.Model = modelName;
-            s.BrandId = Brandid;
-            s.WeaponId = weaponid;
-            ctx.SaveChanges();
+                Model = obj.Model,
+                BasePrice = obj.BasePrice,
+                WeaponId = obj.WeaponId,
+                BrandId = obj.BrandId
+            };
+            context.Add(s);
+            context.SaveChanges();
         }
-        
-        public void Delete(int id)
+
+        public override void Delete(int id)
         {
-            var x = Read(id);
+            var x = Get(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
@@ -48,19 +45,21 @@ namespace ZNJXL9_HFT_2021221.Repository
             ctx.Remove(x);
             ctx.SaveChanges();
         }
-        public void Create(string modelName, int newPrice, int brandid, int weaponid)
-        {
-            var context = new XYZDbContext();
-            var s = new Starship
-            {
-                Model = modelName,
-                BasePrice = newPrice,
-                WeaponId = weaponid,
-                BrandId = brandid
-            };
-            context.Add(s);
-            context.SaveChanges();
-        }
 
+        public override void Update(Starship obj)
+        {
+            var s = Get(obj.Id);
+            if (s == null)
+            {
+                throw new InvalidOperationException(
+                    "Starship not found"
+                );
+            }
+            s.BasePrice = obj.BasePrice;
+            s.Model = obj.Model;
+            s.BrandId = obj.BrandId;
+            s.WeaponId = obj.WeaponId;
+            ctx.SaveChanges();
+        }
     }
 }

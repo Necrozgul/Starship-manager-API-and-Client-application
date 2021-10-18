@@ -6,10 +6,13 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IRepository<T> where T : class
     {
-        T Read(int id);
+        T Get(int id);
+        IQueryable<T> GetAll();
 
-        IQueryable<T> ReadAll();
+        void Create(T obj);
+        void Delete(int id);
+        void Update(T obj);
     }
 
-   
+
 }

@@ -9,8 +9,8 @@ namespace ZNJXL9_HFT_2021221.Repository
 {
     public interface IWeaponRepository : IRepository<Weapon>
     {
-        void Update(int id, string name);
+        void Update(Weapon obj);
         void Delete(int id);
-        void Create(string name);
+        void Create(Weapon obj);
     }
 }

@@ -14,20 +14,20 @@ namespace ZNJXL9_HFT_2021221.Data
 
         public Starship() {}
 
-        public Starship(string modelName, int id, int price)
+        public Starship(string modelName, int price, int brandid, int weaponid)
         {
             Model = modelName;
-            BrandId = id;
+            BrandId = brandid;
             BasePrice = price;
-            WeaponId = id;
+            WeaponId = weaponid;
         }
 
-        public Starship(string modelName, int id)
-        {
-            Model = modelName;
-            BrandId = id;
-            WeaponId = id;
-        }
+        //public Starship(string modelName, int id)
+        //{
+        //    Model = modelName;
+        //    BrandId = id;
+        //    WeaponId = id;
+        //}
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
