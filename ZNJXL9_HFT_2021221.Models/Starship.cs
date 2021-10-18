@@ -22,12 +22,14 @@ namespace ZNJXL9_HFT_2021221.Data
             WeaponId = weaponid;
         }
 
-        //public Starship(string modelName, int id)
-        //{
-        //    Model = modelName;
-        //    BrandId = id;
-        //    WeaponId = id;
-        //}
+        public Starship(int id,string modelName, int price, int brandid, int weaponid)
+        {
+            Model = modelName;
+            BrandId = brandid;
+            WeaponId = weaponid;
+            BasePrice = price;
+            Id = id;
+        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
