@@ -41,7 +41,7 @@ namespace ZNJXL9_HFT_2021221.Test
                         Model = "ModelName",
                         BrandId = 0,
                         WeaponId = 1,
-                        BasePrice = 500,
+                        BasePrice = 300,
                         Id = 1
                     },
                     new Starship()
@@ -49,7 +49,7 @@ namespace ZNJXL9_HFT_2021221.Test
                         Model = "ModelName2",
                         BrandId = 0,
                         WeaponId = 11,
-                        BasePrice = 500,
+                        BasePrice = 100,
                         Id = 2
                     }
                     }.AsQueryable());
@@ -82,11 +82,8 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]
             public void AVGPriceTest()
             {
-                //ACT
                 var result = cl.AVGPrice();
-
-                //ASSERT
-                Assert.That(result, Is.EqualTo(500));
+                Assert.That(result, Is.EqualTo(200));
             }
             [Test]
             public void AVGPriceByModelTest()
@@ -97,7 +94,7 @@ namespace ZNJXL9_HFT_2021221.Test
                 //ASSERT
                 Assert.That(result[0],
                     Is.EqualTo(new KeyValuePair<string, double>
-                    ("ModelName", 500)));
+                    ("ModelName", 300)));
             }
             [TestCase(3000, true)]
             [TestCase(2000, true)]
@@ -121,15 +118,25 @@ namespace ZNJXL9_HFT_2021221.Test
                 }
 
             }
-            [Test]
-            public void DeleteStarshipTest()
-            {
-                Assert.That(() => cl.Delete(1), Throws.Nothing);
-            }
+            
             [Test]            
             public void GetOneStarshipTest()
             {
                 Assert.That(() => cl.GetOne(1), Throws.Nothing);
+            }
+            [TestCase(1,true)]
+            [TestCase(2,false)]
+            public void GetTheMostExpensiveStarshipTest(int id, bool r)
+            {
+                var result=  cl.MostExpensiveStarship();
+                Assert.That((result.Id == id)==r);                
+            }
+            [TestCase(1,true)]
+            [TestCase(2,false),]
+            public void GetTheCheapestStarShip(int id, bool r)
+            {
+                var result = cl.MostExpensiveStarship();
+                Assert.That((result.Id == id)==r);
             }
             [Test]
             public void GetAllStarshipTest()
