@@ -24,10 +24,10 @@ namespace ZNJXL9_HFT_2021221.Logic
             return starshipRepository.GetAll().Average(t => t.BasePrice) ?? 0;
         }
 
-        public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
         {
             return from x in starshipRepository.GetAll()
-                   group x by x.Brand.Name into g
+                   group x by x.Model into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.BasePrice) ?? 0);
         }
@@ -76,25 +76,18 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
             
         }
-        public IList<AveragesResult> GetBrandAverages()
+        public IList<AveragesResult> GetModelAverages()
         {
-            var q = from car in starshipRepository.GetAll()
-                    group car
-                    by new { car.Brand.Id, car.Brand.Name }
+            var q = from s in starshipRepository.GetAll()
+                    group s
+                    by new { s.Id, s.Model }
                     into grp
                     select new AveragesResult()
                     {
-                        BrandName = grp.Key.Name,
+                        ModelName = grp.Key.Model,
                         AveragePrice = grp.Average(x => x.BasePrice) ?? 0
                     };
             return q.ToList();
         }
-
-        Starship IStarshipLogic.GetOne(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

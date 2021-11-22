@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,184 +8,173 @@ using System.Threading.Tasks;
 using ZNJXL9_HFT_2021221.Data;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
-
+using ZNJXL9_HFT_2021221.Repository;
 
 namespace ZNJXL9_HFT_2021221.Test
 {
     [TestFixture]
     public class Tester
     {
-        [Test]
-        public void TestCtor()
+        [TestFixture]
+        public class TestWithMock
         {
-            Starship storage = new LRU();
-            Assert.That(storage.Recent, Is.Not.Null);
-            Assert.That(storage.Recent, Is.Empty);
-        }
-
-        [Test]
-        public void TestDefaultCtorParam()
-        {
-            LRU storage = new LRU();
-            Assert.That(storage.ListLimit, Is.EqualTo(LRU.DEFAULT_LIMIT));
-        }
-
-        [TestCase(10)]
-        [TestCase(5)]
-        public void TestCtorLimitOnGoodParam(int limit)
-        {
-            LRU storage = new LRU(limit);
-            Assert.That(storage.ListLimit, Is.EqualTo(limit));
-        }
-
-        // Edge cases, boundary testing
-        // random testing: monkey testing, fuzzing
-        [TestCase(0)]
-        [TestCase(-45)]
-        public void TestCtorLimitOnBadParam(int limit)
-        {
-            Assert.That(
-                () => { LRU storage = new LRU(limit); },
-                Throws.TypeOf<ArgumentOutOfRangeException>()
-            );
-        }
-
-        // testing on one LRU
-
-        const int LIMIT = 5;
-        LRU lru;
-        [SetUp]
-        public void Setup()
-        {
-            lru = new LRU(LIMIT);
-        }
-
-        [Test]
-        public void TestAddNullShouldThrowException()
-        {
-            Assert.That(
-                () => { lru.Add(null); },
-                Throws.ArgumentNullException
-            );
-        }
-
-        [Test]
-        public void TestLimitWorks()
-        {
-            object[] instances = new object[LIMIT * 2];
-            for (int i = 0; i < instances.Length; i++)
+            //Érdemes lenne normál teszteket írni... 
+            StarshipLogic cl;
+            BrandLogic bl;
+            WeaponLogic wl;
+            public TestWithMock()
             {
-                instances[i] = new { IDX = i };
-                lru.Add(instances[i]);
+                Mock<IStarshipRepository> mockStarshipRepository =
+                    new Mock<IStarshipRepository>();
+
+                Brand fakeBrand = new Brand()
+                {
+                    Id = 0,
+                    Name = "ST1"
+                };
+                mockStarshipRepository.Setup((t) => t.Create(It.IsAny<Starship>()));
+                mockStarshipRepository.Setup((t) => t.GetAll()).Returns(
+                    new List<Starship>()
+                    {
+                    new Starship()
+                    {
+                        Model = "ModelName",
+                        BrandId = 0,
+                        WeaponId = 1,
+                        BasePrice = 500,
+                        Id = 1
+                    },
+                    new Starship()
+                    {
+                        Model = "ModelName2",
+                        BrandId = 0,
+                        WeaponId = 11,
+                        BasePrice = 500,
+                        Id = 2
+                    }
+                    }.AsQueryable());
+                cl = new StarshipLogic(mockStarshipRepository.Object);
+
+                //Brand
+                Mock<IBrandRepository> mockBrandRepository =
+                    new Mock<IBrandRepository>();
+                mockBrandRepository.Setup((t) => t.Create(It.IsAny<Brand>()));
+                mockBrandRepository.Setup((t) => t.GetAll()).Returns(
+                    new List<Brand>()
+                    {
+                    new Brand(){ Name="Testbrand1",Id=1},
+                    new Brand(){ Name="Testbrand2",Id=2},
+                    }.AsQueryable());
+                bl = new BrandLogic(mockBrandRepository.Object);
+
+                //Weapon
+                Mock<IWeaponRepository> mockWeaponRepository =
+                    new Mock<IWeaponRepository>();
+                mockWeaponRepository.Setup((t) => t.Create(It.IsAny<Weapon>()));
+                mockWeaponRepository.Setup((t) => t.GetAll()).Returns(
+                    new List<Weapon>()
+                    {
+                    new Weapon(){ Name="TW1",Id=1},
+                    new Weapon(){ Name="TW2",Id=2},
+                    }.AsQueryable());
+                wl = new WeaponLogic(mockWeaponRepository.Object);
             }
-            Assert.That(lru.Recent.Count, Is.EqualTo(LIMIT));
-            for (int i = 0; i < LIMIT; i++)
+            [Test]
+            public void AVGPriceTest()
             {
-                Assert.That(lru.Recent, Does.Contain(instances[i + LIMIT]));
-            }
-        }
+                //ACT
+                var result = cl.AVGPrice();
 
-        // ***NO*** IEnumarable<object[]> since nunit/issues/1792
-        static IEnumerable<TestCaseData> TestCountsSource
-        {
-            get
+                //ASSERT
+                Assert.That(result, Is.EqualTo(500));
+            }
+            [Test]
+            public void AVGPriceByModelTest()
             {
-                var first = new { IDX = 1 };
-                var second = new { IDX = 2 };
-                var third = new { IDX = 3 };
-                List<TestCaseData> output = new List<TestCaseData>();
-                output.Add(new TestCaseData(new object[] { first, second, third }, 3));
-                output.Add(new TestCaseData(new object[] { first, second, second }, 2));
-                output.Add(new TestCaseData(new object[] { first, first, first }, 1));
-                return output;
-                // alternative: yield return
+                //ACT
+                var result = cl.AVGPriceByModels().ToArray();
+
+                //ASSERT
+                Assert.That(result[0],
+                    Is.EqualTo(new KeyValuePair<string, double>
+                    ("ModelName", 500)));
             }
-        }
-
-        [TestCaseSource(nameof(TestCountsSource))]
-        [TestCaseSource(nameof(TestCountSourceYield))]
-        public void TestCounts(object[] instances, int expectedCount)
-        {
-            foreach (object item in instances) lru.Add(item);
-            Assert.That(lru.Recent.Count, Is.EqualTo(expectedCount));
-        }
-
-        static IEnumerable<TestCaseData> TestCountSourceYield
-        {
-            get
+            [TestCase(3000, true)]
+            [TestCase(2000, true)]
+            public void CreateStarshipTest(int price, bool result)
             {
-                var first = new { IDX = 1 };
-                var second = new { IDX = 2 };
-                var third = new { IDX = 3 };
-                yield return new TestCaseData(new object[] { first, second, third }, 3);
-                yield return new TestCaseData(new object[] { first, second, second }, 2);
-                yield return new TestCaseData(new object[] { first, first, first }, 1);
-            }
-        }
+                if (result)
+                {
+                    Assert.That(() => cl.Create(new Starship()
+                    {
+                        Model = "Astra",
+                        BasePrice = price
+                    }), Throws.Nothing);
+                }
+                else
+                {
+                    Assert.That(() => cl.Create(new Starship()
+                    {
+                        Model = "Astra",
+                        BasePrice = price
+                    }), Throws.Exception);
+                }
 
-        public static IEnumerable<TestCaseData> TestOrderSource
-        {
-            get
+            }
+            [Test]            
+            public void GetOneStarshipTest()
             {
-                var first = new { IDX = 1 };
-                var second = new { IDX = 2 };
-                var third = new { IDX = 3 };
-                List<TestCaseData> output = new List<TestCaseData>();
-                output.Add(new TestCaseData
-                (
-                    new object[] { first, second, third }, // items added
-                    new object[] { third, second, first } // expected order
-                ));
-                output.Add(new TestCaseData
-                (
-                    new object[] { first, second, second }, // items added
-                    new object[] { second, first } // expected order
-                ));
-                output.Add(new TestCaseData
-                (
-                    new object[] { first, second, first }, // items added
-                    new object[] { first, second } // expected order
-                ));
-                return output;
+                Assert.That(() => cl.GetOne(1), Throws.Nothing);
             }
-        }
-
-        public static IEnumerable<TestCaseData> TestOrderSourceYield
-        {
-            get
+            [Test]
+            public void GetAllStarshipTest()
             {
-                var first = new { IDX = 1 };
-                var second = new { IDX = 2 };
-                var third = new { IDX = 3 };
-                yield return new TestCaseData
-                (
-                    new object[] { first, second, third }, // items added
-                    new object[] { third, second, first } // expected order
-                );
-                yield return new TestCaseData
-                (
-                    new object[] { first, second, second }, // items added
-                    new object[] { second, first } // expected order
-                );
-                yield return new TestCaseData
-                (
-                    new object[] { first, second, first }, // items added
-                    new object[] { first, second } // expected order
-                );
+                Assert.That(() => cl.GetAll(), Throws.Nothing);
             }
-        }
 
-        [TestCaseSource(nameof(TestOrderSourceYield))]
-        public void TestOrder(object[] instancesToAdd, object[] expectedOrder)
-        {
-            foreach (object item in instancesToAdd) lru.Add(item);
-            for (int i = 0; i < expectedOrder.Length; i++)
+            [Test]
+            public void CreateBrandTest()
             {
-                Assert.That(lru.Recent[i], Is.SameAs(expectedOrder[i]));
+                Assert.That(() => bl.Create(new Brand()
+                {
+                    Name = "BrandName1",
+                    Id = 3
+                }), Throws.Nothing);
             }
-            // REGRESSION: fixes in #7
+            [Test]
+            public void GetOneBrandTest()
+            {
+                Assert.That(() => bl.GetOne(1), Throws.Nothing);
+            }
+            [Test]
+            public void GetAllBrandTest()
+            {
+                Assert.That(() => bl.GetAll(), Throws.Nothing);
+            }
+            [Test]            
+            public void CreateWeaponTest()
+            {
+                Assert.That(() => wl.Create(new Weapon()
+                {
+                    Name = "WeaponName1",
+                    Id = 1
+                }), Throws.Nothing);
+            }
+            [Test]
+            public void GetOneWeaponTest()
+            {
+                Assert.That(() => wl.GetOne(1), Throws.Nothing);
+            }
+            [Test]
+            public void GetAllWeaponTest()
+            {
+                Assert.That(() => wl.GetAll(), Throws.Nothing);
+            }
+            [Test]
+            public void GetModelAvarageTest()
+            {
+                Assert.That(() => cl.GetModelAverages(), Throws.Nothing);
+            }
         }
-
-
     }
 }

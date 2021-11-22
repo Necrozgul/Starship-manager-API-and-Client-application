@@ -40,7 +40,7 @@ namespace ZNJXL9_HFT_2021221
 
             s.Create(new Starship("Starshipcreatingwithnewmethod",2000,2,2));
             s.Update(new Starship(6,"StarshipcreatingwithnewmethodUpdated", 20000, 1, 1));
-            s.GetBrandAverages().ToConsole("BrandAverage");
+            s.GetModelAverages().ToConsole("ModelAverage");
             
             //s.Delete(7);
             starshipData.ToConsole("starships");

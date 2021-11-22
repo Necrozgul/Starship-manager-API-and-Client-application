@@ -15,8 +15,8 @@ namespace ZNJXL9_HFT_2021221.Logic
         void Delete(int id);
 
         //NON CRUD Methods (5)
-        IList<AveragesResult> GetBrandAverages();
+        IList<AveragesResult> GetModelAverages();
         double AVGPrice();
-        IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands();
+        IEnumerable<KeyValuePair<string, double>> AVGPriceByModels();
     }
 }

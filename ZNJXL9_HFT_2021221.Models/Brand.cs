@@ -23,7 +23,6 @@ namespace ZNJXL9_HFT_2021221.Models
 
         [NotMapped]
         public virtual ICollection<Starship> Starships { get; set; }
-
         public Brand()
         {
             Starships = new HashSet<Starship>();
