@@ -49,6 +49,15 @@ namespace ZNJXL9_HFT_2021221.Logic
             return brandRepository.GetOne(id);
         }
 
+        public Brand MostUsedBrand()
+        {
+            var query = (from l in GetAll()
+                         group l by l into gr
+                         orderby gr.Count() descending
+                         select gr.Key).First();
+            return query;
+        }
+
         public void Update(Brand obj)
         {
             if (obj != null && obj.Name != "")

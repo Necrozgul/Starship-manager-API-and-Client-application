@@ -15,6 +15,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         void Create(Brand obj);
         void Update(Brand obj);
         void Delete(int id);
+        Brand MostUsedBrand();
 
         
         

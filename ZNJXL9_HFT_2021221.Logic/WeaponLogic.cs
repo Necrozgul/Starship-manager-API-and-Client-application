@@ -49,6 +49,15 @@ namespace ZNJXL9_HFT_2021221.Logic
             return weaponRepository.GetOne(id);
         }
 
+        public Weapon MostUsedWeapon()
+        {
+            var query = (from l in GetAll()
+                         group l by l into gr
+                         orderby gr.Count() descending
+                         select gr.Key).First();
+            return query;
+        }
+
         public void Update(Weapon obj)
         {
             if (obj.Name != "")

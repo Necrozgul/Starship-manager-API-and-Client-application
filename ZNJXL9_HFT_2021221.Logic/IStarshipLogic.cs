@@ -21,5 +21,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         Starship MostExpensiveStarship();
         Starship CheapestStarship();
 
+
+
     }
 }

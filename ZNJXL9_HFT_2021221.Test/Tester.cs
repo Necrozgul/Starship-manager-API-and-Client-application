@@ -74,8 +74,8 @@ namespace ZNJXL9_HFT_2021221.Test
                 mockWeaponRepository.Setup((t) => t.GetAll()).Returns(
                     new List<Weapon>()
                     {
-                    new Weapon(){ Name="TW1",Id=1},
-                    new Weapon(){ Name="TW2",Id=2},
+                    new Weapon(){ Name="Testweapon1",Id=1},
+                    new Weapon(){ Name="Testweapon2",Id=2},
                     }.AsQueryable());
                 wl = new WeaponLogic(mockWeaponRepository.Object);
             }
@@ -163,6 +163,11 @@ namespace ZNJXL9_HFT_2021221.Test
             {
                 Assert.That(() => bl.GetAll(), Throws.Nothing);
             }
+            [Test]
+            public void MostUsedBrandTest()
+            {
+                Assert.That(bl.MostUsedBrand().Name=="Testbrand1");
+            }
             [Test]            
             public void CreateWeaponTest()
             {
@@ -181,6 +186,11 @@ namespace ZNJXL9_HFT_2021221.Test
             public void GetAllWeaponTest()
             {
                 Assert.That(() => wl.GetAll(), Throws.Nothing);
+            }
+            [Test]
+            public void MostUsedWeaponTest()
+            {
+                Assert.That(wl.MostUsedWeapon().Name == "Testweapon1");
             }
             [Test]
             public void GetModelAvarageTest()
