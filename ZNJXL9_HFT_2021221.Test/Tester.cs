@@ -121,6 +121,11 @@ namespace ZNJXL9_HFT_2021221.Test
                 }
 
             }
+            [Test]
+            public void DeleteStarshipTest()
+            {
+                Assert.That(() => cl.Delete(1), Throws.Nothing);
+            }
             [Test]            
             public void GetOneStarshipTest()
             {

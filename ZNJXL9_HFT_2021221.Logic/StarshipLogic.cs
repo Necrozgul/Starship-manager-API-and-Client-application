@@ -89,5 +89,16 @@ namespace ZNJXL9_HFT_2021221.Logic
                     };
             return q.ToList();
         }
+
+        public Starship MostExpensiveStarship()
+        {
+            var elements = GetAll();
+            return elements.OrderByDescending(obj => obj.BasePrice).First();
+        }
+        public Starship CheapestStarship()
+        {
+            var elements = GetAll();
+            return elements.OrderByDescending(obj => obj.BasePrice).Last();
+        }
     }
 }

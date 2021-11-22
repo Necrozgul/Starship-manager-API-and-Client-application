@@ -25,6 +25,7 @@ namespace ZNJXL9_HFT_2021221.Repository
             var context = new XYZDbContext();
             var s = new Starship
             {
+                Id = obj.Id, //Ez a rész lehet felesleges
                 Model = obj.Model,
                 BasePrice = obj.BasePrice,
                 WeaponId = obj.WeaponId,

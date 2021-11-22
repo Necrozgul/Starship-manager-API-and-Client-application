@@ -16,7 +16,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         void Update(Brand obj);
         void Delete(int id);
 
-        //NON CRUD Methods (5)
+        
         
     }
 }
