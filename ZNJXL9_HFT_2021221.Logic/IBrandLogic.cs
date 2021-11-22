@@ -7,11 +7,11 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Logic
 {
-    interface IBrandLogic
+    public interface IBrandLogic
     {
 
         Brand GetOne(int id);
-        IList<Brand> GetAll();
+        IEnumerable<Brand> GetAll();
         void Create(Brand obj);
         void Update(Brand obj);
         void Delete(int id);

@@ -7,10 +7,10 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Logic
 {
-    interface IWeaponLogic
+    public interface IWeaponLogic
     {
         Weapon GetOne(int id);
-        IList<Weapon> GetAll();
+        IEnumerable<Weapon> GetAll();
         void Create(Weapon obj);
         void Update(Weapon obj);
         void Delete(int id);

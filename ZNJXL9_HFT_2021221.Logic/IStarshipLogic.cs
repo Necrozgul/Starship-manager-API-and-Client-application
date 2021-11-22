@@ -9,7 +9,7 @@ namespace ZNJXL9_HFT_2021221.Logic
     {
         //CRUD Methods
         Starship GetOne(int id);
-        IList<Starship> GetAll();
+        IEnumerable<Starship> GetAll();
         void Create(Starship obj);
         void Update(Starship obj);
         void Delete(int id);
@@ -20,6 +20,8 @@ namespace ZNJXL9_HFT_2021221.Logic
         IEnumerable<KeyValuePair<string, double>> AVGPriceByModels();
         Starship MostExpensiveStarship();
         Starship CheapestStarship();
+        Starship StarShipSearcher(int id, string brandname, string weaponname);
+
 
 
 

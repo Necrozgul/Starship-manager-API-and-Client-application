@@ -39,7 +39,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
         }
 
-        public IList<Weapon> GetAll()
+        public IEnumerable<Weapon> GetAll()
         {
             return weaponRepository.GetAll().ToList();
         }

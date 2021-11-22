@@ -35,8 +35,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         {
             return starshipRepository.GetOne(id);
         }
-
-        IList<Starship> IStarshipLogic.GetAll()
+        IEnumerable<Starship> IStarshipLogic.GetAll()
         {
             return starshipRepository.GetAll().ToList();
         }
@@ -99,6 +98,11 @@ namespace ZNJXL9_HFT_2021221.Logic
         {
             var elements = GetAll();
             return elements.OrderByDescending(obj => obj.BasePrice).Last();
+        }
+        public Starship StarShipSearcher(int id, string brandname, string weaponname)
+        {
+
+            return null;
         }
     }
 }

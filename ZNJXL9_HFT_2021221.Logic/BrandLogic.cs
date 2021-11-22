@@ -39,7 +39,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
         }
 
-        public IList<Brand> GetAll()
+        public IEnumerable<Brand> GetAll()
         {
             return brandRepository.GetAll().ToList();
         }
