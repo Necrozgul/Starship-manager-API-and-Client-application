@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZNJXL9_HFT_2021221.Data
+namespace ZNJXL9_HFT_2021221.Models
 {
     [Table("starships")]
     public class Starship

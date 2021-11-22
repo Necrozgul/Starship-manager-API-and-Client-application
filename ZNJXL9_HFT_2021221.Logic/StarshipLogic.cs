@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZNJXL9_HFT_2021221.Data;
+using ZNJXL9_HFT_2021221.Models;
 using ZNJXL9_HFT_2021221.Repository;
 
 namespace ZNJXL9_HFT_2021221.Logic
@@ -87,6 +88,13 @@ namespace ZNJXL9_HFT_2021221.Logic
                         AveragePrice = grp.Average(x => x.BasePrice) ?? 0
                     };
             return q.ToList();
-        }    
+        }
+
+        Starship IStarshipLogic.GetOne(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

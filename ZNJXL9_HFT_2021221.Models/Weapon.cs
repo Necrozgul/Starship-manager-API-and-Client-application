@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZNJXL9_HFT_2021221.Data;
 
-namespace ZNJXL9_HFT_2021221.Data
+namespace ZNJXL9_HFT_2021221.Models
 {
     [Table("weapon")]
     public class Weapon

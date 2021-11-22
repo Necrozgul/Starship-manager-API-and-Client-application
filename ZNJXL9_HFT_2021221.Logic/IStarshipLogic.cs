@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ZNJXL9_HFT_2021221.Data;
+using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Logic
 {
