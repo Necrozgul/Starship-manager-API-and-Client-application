@@ -34,6 +34,10 @@ namespace ZNJXL9_HFT_2021221.Client
                         info = "Inserting was Succesfull";
                         Console.WriteLine(info);
                         break;
+                    case ConsoleKey.D2:
+                        MenuModifyItem(restService);
+                        Console.WriteLine(info);
+                        break;
                     case ConsoleKey.D3:
                         MenuRemoveItem(restService);
                         info = "Deleting was Succesfull";
@@ -103,6 +107,12 @@ namespace ZNJXL9_HFT_2021221.Client
 
             }
             
+        }
+
+        static void MenuModifyItem(RestService restService)
+        {
+            Console.WriteLine("\nThis function is not ready yet.");
+
         }
         static void MenuRemoveItem(RestService restService)
         {
