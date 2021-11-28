@@ -10,9 +10,6 @@ namespace ZNJXL9_HFT_2021221.Data
 {
     public partial class XYZDbContext : DbContext
     {
-        //Help with writing modify
-        //https://www.learnentityframeworkcore.com/dbcontext/modifying-data
-        // Tables
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Weapon> Weapons { get; set; }
         public virtual DbSet<Starship> Starships { get; set; }
@@ -48,8 +45,6 @@ namespace ZNJXL9_HFT_2021221.Data
                     .HasForeignKey(starship => starship.WeaponId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
-
-
             DbSeed db = new DbSeed();
             modelBuilder.Entity<Starship>().HasData(DbSeed.starships);
             modelBuilder.Entity<Brand>().HasData(DbSeed.brands);

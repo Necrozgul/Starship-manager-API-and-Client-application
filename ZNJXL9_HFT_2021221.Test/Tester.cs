@@ -33,7 +33,7 @@ namespace ZNJXL9_HFT_2021221.Test
                     Name = "ST1"
                 };
                 mockStarshipRepository.Setup((t) => t.Create(It.IsAny<Starship>()));
-                mockStarshipRepository.Setup((t) => t.GetAll()).Returns(
+                mockStarshipRepository.Setup((t) => t.ReadAll()).Returns(
                     new List<Starship>()
                     {
                     new Starship()
@@ -59,7 +59,7 @@ namespace ZNJXL9_HFT_2021221.Test
                 Mock<IBrandRepository> mockBrandRepository =
                     new Mock<IBrandRepository>();
                 mockBrandRepository.Setup((t) => t.Create(It.IsAny<Brand>()));
-                mockBrandRepository.Setup((t) => t.GetAll()).Returns(
+                mockBrandRepository.Setup((t) => t.ReadAll()).Returns(
                     new List<Brand>()
                     {
                     new Brand(){ Name="Testbrand1",Id=1},
@@ -71,7 +71,7 @@ namespace ZNJXL9_HFT_2021221.Test
                 Mock<IWeaponRepository> mockWeaponRepository =
                     new Mock<IWeaponRepository>();
                 mockWeaponRepository.Setup((t) => t.Create(It.IsAny<Weapon>()));
-                mockWeaponRepository.Setup((t) => t.GetAll()).Returns(
+                mockWeaponRepository.Setup((t) => t.ReadAll()).Returns(
                     new List<Weapon>()
                     {
                     new Weapon(){ Name="Testweapon1",Id=1},
@@ -122,7 +122,7 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]            
             public void GetOneStarshipTest()
             {
-                Assert.That(() => cl.GetOne(1), Throws.Nothing);
+                Assert.That(() => cl.Read(1), Throws.Nothing);
             }
             [TestCase(1,true)]
             [TestCase(2,false)]
@@ -141,7 +141,7 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]
             public void GetAllStarshipTest()
             {
-                Assert.That(() => cl.GetAll(), Throws.Nothing);
+                Assert.That(() => cl.ReadAll(), Throws.Nothing);
             }
 
             [Test]
@@ -156,7 +156,7 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]
             public void GetOneBrandTest()
             {
-                Assert.That(() => bl.GetOne(1), Throws.Nothing);
+                Assert.That(() => bl.Read(1), Throws.Nothing);
             }
             [Test]
             public void GetAllBrandTest()
@@ -180,12 +180,12 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]
             public void GetOneWeaponTest()
             {
-                Assert.That(() => wl.GetOne(1), Throws.Nothing);
+                Assert.That(() => wl.Read(1), Throws.Nothing);
             }
             [Test]
             public void GetAllWeaponTest()
             {
-                Assert.That(() => wl.GetAll(), Throws.Nothing);
+                Assert.That(() => wl.ReadAll(), Throws.Nothing);
             }
             [Test]
             public void MostUsedWeaponTest()
