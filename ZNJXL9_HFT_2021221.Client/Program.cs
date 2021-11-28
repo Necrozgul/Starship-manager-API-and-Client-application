@@ -11,7 +11,6 @@ namespace ZNJXL9_HFT_2021221.Client
             RestService restService = new RestService("http://localhost:51716");
             Thread.Sleep(3000);
 
-
             var brands = restService.Get<Brand>("brand");
             var starships = restService.Get<Starship>("starship");
             var weapons = restService.Get<Weapon>("weapon");
@@ -60,7 +59,6 @@ namespace ZNJXL9_HFT_2021221.Client
                 Console.WriteLine();
             } while (chinput.Key != ConsoleKey.X);
         }
-        
         static void MenuShow()
         {
             Console.WriteLine("################  Menu  ################");
@@ -108,7 +106,6 @@ namespace ZNJXL9_HFT_2021221.Client
             }
             
         }
-
         static void MenuModifyItem(RestService restService)
         {
             Console.WriteLine("\nThis function is not ready yet.");
@@ -122,7 +119,6 @@ namespace ZNJXL9_HFT_2021221.Client
             int id = int.Parse(Console.ReadLine());
             restService.Delete(id, tabblename);
         }
-    
         static string ListItems(RestService restService) 
         {
             Console.WriteLine("\nGive the name of the table you want to list: (starship,brand,weapon)");
