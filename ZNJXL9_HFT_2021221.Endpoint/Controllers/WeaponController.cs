@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
 {
-    [Microsoft.AspNetCore.Components.Route("[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class WeaponController : ControllerBase
     {
@@ -50,6 +46,4 @@ namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
             logic.Delete(id);
         }
     }
-
-
 }

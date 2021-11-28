@@ -16,11 +16,11 @@ namespace ZNJXL9_HFT_2021221.Client
             restService.Post<Brand>(new Brand()
             {
                 Name = "Peugeot"
-            }, "brands");
+            }, "brand");
 
-            var brands = restService.Get<Brand>("brands");
-            var cars = restService.Get<Starship>("starships");
-            var weapons = restService.Get<Weapon>("weapons");
+            var brands = restService.Get<Brand>("brand");
+            var cars = restService.Get<Starship>("starship");
+            var weapons = restService.Get<Weapon>("weapon");
             ; 
         }
         
