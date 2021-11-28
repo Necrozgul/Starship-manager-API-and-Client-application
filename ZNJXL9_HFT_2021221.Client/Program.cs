@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Client
@@ -8,15 +9,7 @@ namespace ZNJXL9_HFT_2021221.Client
         static void Main(string[] args)
         {
             RestService restService = new RestService("http://localhost:51716");
-
-            //restService.Post<Starship>(new Starship()
-            //{
-            //    Model = "UjApiModel",
-            //    BasePrice = 154,
-            //    BrandId = 1,
-            //    WeaponId=1
-
-            //}, "starship");
+            
 
             var brands = restService.Get<Brand>("brand");
             var starships = restService.Get<Starship>("starship");

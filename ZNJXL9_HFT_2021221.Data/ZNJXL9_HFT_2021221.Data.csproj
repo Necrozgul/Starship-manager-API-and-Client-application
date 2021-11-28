@@ -5,16 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="StarshipDb.mdf" />
-    <None Remove="StarshipDb_log.ldf" />
+    <None Remove="StarshipDB.mdf" />
+    <None Remove="StarshipDB_log.ldf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="StarshipDb.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="StarshipDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="StarshipDb_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="StarshipDB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
