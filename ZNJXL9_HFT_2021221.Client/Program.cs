@@ -14,8 +14,29 @@ namespace ZNJXL9_HFT_2021221.Client
             var brands = restService.Get<Brand>("brand");
             var starships = restService.Get<Starship>("starship");
             var weapons = restService.Get<Weapon>("weapon");
-            MenuShow();
-            ConsoleMenu(restService);
+            foreach (var item in starships)
+            {
+                Console.WriteLine(item.ToString());
+            }
+            restService.Post<Starship>(new Starship()
+            {
+                Model = "Model7",
+                WeaponId = 1,
+                BrandId = 1,
+                BasePrice = 15,
+
+            }, "starship");
+            restService.Put<Starship>(new Starship()
+            {
+                Id = 7,
+                Model = "editedmodel",
+                WeaponId = 1,
+                BrandId= 1,
+                BasePrice = 15,
+
+            },"starship");
+            //MenuShow();
+            //ConsoleMenu(restService);
             
         }
         static void ConsoleMenu(RestService restService)
