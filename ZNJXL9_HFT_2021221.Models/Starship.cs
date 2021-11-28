@@ -37,7 +37,7 @@ namespace ZNJXL9_HFT_2021221.Models
 
         public override string ToString()
         {
-            return $"[{Id}]{Model} - {Brand}, {Weapon}";
+            return $"[{Id}]{Model}({BasePrice}) - {BrandId}, {WeaponId}";
         }
     }
 }

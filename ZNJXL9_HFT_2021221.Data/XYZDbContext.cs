@@ -20,22 +20,18 @@ namespace ZNJXL9_HFT_2021221.Data
 
         public XYZDbContext()
         {
-            // creating the neccessary elements to get the database
             this.Database.EnsureCreated();
         }
-
-        public XYZDbContext(DbContextOptions<XYZDbContext> options)
-            : base(options)
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
+            if (!builder.IsConfigured)
             {
-                string s = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StarshipDb.mdf;Integrated Security=True";
-                optionsBuilder.
-                    UseLazyLoadingProxies().UseSqlServer(s);
+                string conn =
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StarshipDb.mdf;Integrated Security=True";
+                builder
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(conn);
             }
         }
 
@@ -46,33 +42,18 @@ namespace ZNJXL9_HFT_2021221.Data
                 entity.HasOne(starship => starship.Brand)
                     .WithMany(brand => brand.Starships)
                     .HasForeignKey(starship => starship.BrandId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                
-            });
-            modelBuilder.Entity<Starship>(entity =>
-            {
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(starship => starship.Weapon)
                     .WithMany(weapon => weapon.Starships)
                     .HasForeignKey(starship => starship.WeaponId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
 
             DbSeed db = new DbSeed();
-            foreach (var item in DbSeed.brands)
-            {                
-                modelBuilder.Entity<Brand>().HasData(item);
-            }
-            foreach (var item in DbSeed.weapons)
-            {
-                modelBuilder.Entity<Weapon>().HasData(item);
-            }
-            foreach (var item in DbSeed.starships)
-            {
-                modelBuilder.Entity<Starship>().HasData(item);
-            }
-
+            modelBuilder.Entity<Starship>().HasData(DbSeed.starships);
+            modelBuilder.Entity<Brand>().HasData(DbSeed.brands);
+            modelBuilder.Entity<Weapon>().HasData(DbSeed.weapons);
         }
     }
 }

@@ -24,5 +24,9 @@ namespace ZNJXL9_HFT_2021221.Models
         {
             Starships = new HashSet<Starship>();
         }
+        public override string ToString()
+        {
+            return $"[{Id}] {Name}";
+        }
     }
 }

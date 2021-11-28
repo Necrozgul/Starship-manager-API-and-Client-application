@@ -36,12 +36,12 @@ namespace ZNJXL9_HFT_2021221.Data
             weapons.Add(Orbitalautocannon);
 
 
-            Starship kuatEclipse = new Starship() { Id = 1, BrandId = kuat.Id, BasePrice = 200000, Model = "Eclipse", WeaponId = Orbitalautocannon.Id };
-            Starship kuatExecutor = new Starship() { Id = 2, BrandId = kuat.Id, BasePrice = 30000, Model = "Executor", WeaponId = Orbitalautocannon.Id };
-            Starship cecYV666 = new Starship() { Id = 3, BrandId = cec.Id, BasePrice = 10000, Model = "YV-666", WeaponId = Turbolaser.Id };
-            Starship cecVCX100 = new Starship() { Id = 4, BrandId = cec.Id, BasePrice = 15000, Model = "VCX-150", WeaponId = Turbolaser.Id };
-            Starship cygnusXwing = new Starship() { Id = 5, BrandId = cygnus.Id, BasePrice = 20000, Model = "XWing", WeaponId = Flacgun.Id };
-            Starship cygnusT4a = new Starship() { Id = 6, BrandId = cygnus.Id, BasePrice = 25000, Model = "T-4A", WeaponId = Turbolaser.Id };
+            Starship kuatEclipse = new Starship() { Id = 1, BrandId = kuat.Id, BasePrice = 200, Model = "Eclipse", WeaponId = Orbitalautocannon.Id };
+            Starship kuatExecutor = new Starship() { Id = 2, BrandId = kuat.Id, BasePrice = 30, Model = "Executor", WeaponId = Orbitalautocannon.Id };
+            Starship cecYV666 = new Starship() { Id = 3, BrandId = cec.Id, BasePrice = 100, Model = "YV-666", WeaponId = Turbolaser.Id };
+            Starship cecVCX100 = new Starship() { Id = 4, BrandId = cec.Id, BasePrice = 150, Model = "VCX-150", WeaponId = Turbolaser.Id };
+            Starship cygnusXwing = new Starship() { Id = 5, BrandId = cygnus.Id, BasePrice = 20, Model = "XWing", WeaponId = Flacgun.Id };
+            Starship cygnusT4a = new Starship() { Id = 6, BrandId = cygnus.Id, BasePrice = 250, Model = "T-4A", WeaponId = Turbolaser.Id };
             starships.Add(kuatEclipse);
             starships.Add(kuatExecutor);
             starships.Add(cecYV666);
