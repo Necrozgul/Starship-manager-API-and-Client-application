@@ -8,11 +8,14 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
-    public interface IStarshipRepository : IRepository<Starship>
+    public interface IStarshipRepository
     {
-        void Update(Starship obj);
+        void Create(Starship starship);
         void Delete(int id);
-        void Create(Starship obj);
+        Starship Read(int id);
+        IQueryable<Starship> ReadAll();
+        void Update(Starship starship);
+
     }
 
 }

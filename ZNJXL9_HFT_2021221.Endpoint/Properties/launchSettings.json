@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:43684",
+      "applicationUrl": "http://localhost:51716",
       "sslPort": 0
     }
   },
@@ -11,14 +11,16 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "starship",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ZNJXL9_HFT_2021221.Endpoint": {
+    "CarDb.Endpoint": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
+      "launchUrl": "starship",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -26,3 +28,31 @@
     }
   }
 }
+//{
+//  "iisSettings": {
+//    "windowsAuthentication": false,
+//    "anonymousAuthentication": true,
+//    "iisExpress": {
+//      "applicationUrl": "http://localhost:43684",
+//      "sslPort": 0
+//    }
+//  },
+//  "profiles": {
+//    "IIS Express": {
+//      "commandName": "IISExpress",
+//      "launchBrowser": true,
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      }
+//    },
+//    "ZNJXL9_HFT_2021221.Endpoint": {
+//      "commandName": "Project",
+//      "dotnetRunMessages": "true",
+//      "launchBrowser": true,
+//      "applicationUrl": "http://localhost:5000",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      }
+//    }
+//  }
+//}

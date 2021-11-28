@@ -13,11 +13,19 @@ namespace ZNJXL9_HFT_2021221.Logic
         IBrandRepository brandRepository;
 
         public BrandLogic(IBrandRepository brandRepository)
-        // DI: Dependency Injection
         {
             this.brandRepository = brandRepository;
         }
-        //TODO
+        public IEnumerable<Brand> ReadAll()
+        {
+            return brandRepository.ReadAll().ToList();
+        }
+
+        public Brand Read(int id)
+        {
+            return brandRepository.Read(id);
+        }
+
         public void Create(Brand obj)
         {
             if (obj.Name == "null")
@@ -29,7 +37,7 @@ namespace ZNJXL9_HFT_2021221.Logic
 
         public void Delete(int id)
         {
-            if (brandRepository.GetOne(id) != null)
+            if (brandRepository.Read(id) != null)
             {
                 brandRepository.Delete(id);
             }
@@ -39,19 +47,9 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
         }
 
-        public IEnumerable<Brand> GetAll()
-        {
-            return brandRepository.GetAll().ToList();
-        }
-
-        public Brand GetOne(int id)
-        {
-            return brandRepository.GetOne(id);
-        }
-
         public Brand MostUsedBrand()
         {
-            var query = (from l in GetAll()
+            var query = (from l in ReadAll()
                          group l by l into gr
                          orderby gr.Count() descending
                          select gr.Key).First();

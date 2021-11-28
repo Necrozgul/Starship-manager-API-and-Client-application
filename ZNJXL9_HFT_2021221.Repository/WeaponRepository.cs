@@ -9,47 +9,40 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
-    public class WeaponRepository :
-        Repository<Weapon>, IWeaponRepository
+    public class WeaponRepository : IWeaponRepository
     {
-        public WeaponRepository(DbContext ctx) : base(ctx) { }
-
-        public override Weapon GetOne(int id)
+        XYZDbContext db;
+        public WeaponRepository(XYZDbContext db)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            this.db = db;
         }
 
-        public override void Create(Weapon obj)
+        public Weapon Read(int id)
         {
-            ctx.Add(obj);
-            ctx.SaveChanges();
+            return db.Weapons.FirstOrDefault(t => t.Id == id);
+        }
+        public void Create(Weapon obj)
+        {
+            db.Weapons.Add(obj);
+            db.SaveChanges();
         }
 
-        public override void Delete(int id)
+        public void Delete(int id)
         {
-            var x = GetOne(id);
-            if (x == null)
-            {
-                throw new InvalidOperationException(
-                    "Weapon not found"
-                );
-            }
-            ctx.Remove(x);
-            ctx.SaveChanges();
+            db.Remove(Read(id));
+            db.SaveChanges();
         }
 
-        public override void Update(Weapon obj)
+        public void Update(Weapon obj)
         {
-            var s = GetOne(obj.Id);
-            if (s == null)
-            {
-                throw new InvalidOperationException(
-                    "Weapon not found"
-                );
-            }
-            s.Name = obj.Name;
-            s.Id = obj.Id;
-            ctx.SaveChanges();
+            var oldbrand = Read(obj.Id);
+            oldbrand.Name = obj.Name;
+            db.SaveChanges();
+        }
+
+        public IQueryable<Weapon> ReadAll()
+        {
+            return db.Weapons;
         }
     }
 }

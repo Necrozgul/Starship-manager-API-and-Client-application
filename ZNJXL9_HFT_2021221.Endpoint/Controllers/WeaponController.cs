@@ -23,13 +23,13 @@ namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<Weapon> Get()
         {
-            return logic.GetAll();
+            return logic.ReadAll();
         }
 
         [HttpGet("{id}")]
         public Weapon Get(int id)
         {
-            return logic.GetOne(id);
+            return logic.Read(id);
         }
 
         [HttpPost]

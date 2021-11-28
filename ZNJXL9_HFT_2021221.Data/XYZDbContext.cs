@@ -13,8 +13,8 @@ namespace ZNJXL9_HFT_2021221.Data
         //Help with writing modify
         //https://www.learnentityframeworkcore.com/dbcontext/modifying-data
         // Tables
-        public virtual DbSet<Brand> Brand { get; set; }
-        public virtual DbSet<Weapon> Weapon { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Weapon> Weapons { get; set; }
         public virtual DbSet<Starship> Starships { get; set; }
 
 

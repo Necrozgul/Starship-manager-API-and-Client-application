@@ -10,11 +10,9 @@ namespace ZNJXL9_HFT_2021221.Logic
 {
     public class WeaponLogic : IWeaponLogic
     {
-        //TODO
         IWeaponRepository weaponRepository;
 
         public WeaponLogic(IWeaponRepository weaponRepository)
-        // DI: Dependency Injection
         {
             this.weaponRepository = weaponRepository;
         }
@@ -29,7 +27,7 @@ namespace ZNJXL9_HFT_2021221.Logic
 
         public void Delete(int id)
         {
-            if (weaponRepository.GetOne(id) != null)
+            if (weaponRepository.Read(id) != null)
             {
                 weaponRepository.Delete(id);
             }
@@ -39,19 +37,19 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
         }
 
-        public IEnumerable<Weapon> GetAll()
+        public IEnumerable<Weapon> ReadAll()
         {
-            return weaponRepository.GetAll().ToList();
+            return weaponRepository.ReadAll().ToList();
         }
 
-        public Weapon GetOne(int id)
+        public Weapon Read(int id)
         {
-            return weaponRepository.GetOne(id);
+            return weaponRepository.Read(id);
         }
 
         public Weapon MostUsedWeapon()
         {
-            var query = (from l in GetAll()
+            var query = (from l in ReadAll()
                          group l by l into gr
                          orderby gr.Count() descending
                          select gr.Key).First();

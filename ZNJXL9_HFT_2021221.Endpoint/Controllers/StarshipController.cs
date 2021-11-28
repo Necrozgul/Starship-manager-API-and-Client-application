@@ -24,14 +24,14 @@ namespace ZNJXL9_HFT_2021221.Endpoint
         [HttpGet]
         public IEnumerable<Starship> Get()
         {
-            return cl.GetAll();
+            return cl.ReadAll();
         }
 
         // GET /car/5
         [HttpGet("{id}")]
         public Starship Get(int id)
         {
-            return cl.GetOne(id);
+            return cl.Read(id);
         }
 
         // POST /car

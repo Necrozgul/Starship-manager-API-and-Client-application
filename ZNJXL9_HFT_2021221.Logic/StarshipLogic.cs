@@ -14,34 +14,18 @@ namespace ZNJXL9_HFT_2021221.Logic
         IStarshipRepository starshipRepository;
 
         public StarshipLogic(IStarshipRepository starshipRepository)
-        // DI: Dependency Injection
         {
             this.starshipRepository = starshipRepository;
         }
 
-        public double AVGPrice()
+        //CRUD
+        public Starship Read(int id)
         {
-            return starshipRepository.GetAll().Average(t => t.BasePrice) ?? 0;
+            return starshipRepository.Read(id);
         }
-
-        public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
+        public IEnumerable<Starship> ReadAll()
         {
-            return from x in starshipRepository.GetAll()
-                   group x by x.Model into g
-                   select new KeyValuePair<string, double>
-                   (g.Key, g.Average(t => t.BasePrice) ?? 0);
-        }
-        public Starship GetOne(int id)
-        {
-            return starshipRepository.GetOne(id);
-        }
-        IEnumerable<Starship> IStarshipLogic.GetAll()
-        {
-            return starshipRepository.GetAll().ToList();
-        }
-        public IList<Starship> GetAll()
-        {
-            return starshipRepository.GetAll().ToList();
+            return starshipRepository.ReadAll();
         }
         public void Create(Starship starship)
         {
@@ -53,7 +37,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         }
         public void Update(Starship obj)
         {
-            if (obj != null && obj.Model != "" && obj.BrandId != null && obj.WeaponId != null)
+            if (obj != null && obj.Model != "")
             {
                 starshipRepository.Update(obj);
             }
@@ -61,11 +45,11 @@ namespace ZNJXL9_HFT_2021221.Logic
             {
                 throw new ErrorException("Some Data is not valid");
             }
-            
+
         }
         public void Delete(int id)
         {
-            if (starshipRepository.GetOne(id) != null)
+            if (starshipRepository.Read(id) != null)
             {
                 starshipRepository.Delete(id);
             }
@@ -73,11 +57,26 @@ namespace ZNJXL9_HFT_2021221.Logic
             {
                 throw new ErrorException("There is no Starship with thad id");
             }
-            
+
         }
+        public double AVGPrice()
+        {
+            return starshipRepository.ReadAll().Average(t => t.BasePrice) ?? 0;
+        }
+
+
+        //NON CRUD
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
+        {
+            return from x in starshipRepository.ReadAll()
+                   group x by x.Model into g
+                   select new KeyValuePair<string, double>
+                   (g.Key, g.Average(t => t.BasePrice) ?? 0);
+        }
+        
         public IList<AveragesResult> GetModelAverages()
         {
-            var q = from s in starshipRepository.GetAll()
+            var q = from s in starshipRepository.ReadAll()
                     group s
                     by new { s.Id, s.Model }
                     into grp
@@ -91,18 +90,13 @@ namespace ZNJXL9_HFT_2021221.Logic
 
         public Starship MostExpensiveStarship()
         {
-            var elements = GetAll();
+            var elements = ReadAll();
             return elements.OrderByDescending(obj => obj.BasePrice).First();
         }
         public Starship CheapestStarship()
         {
-            var elements = GetAll();
+            var elements = ReadAll();
             return elements.OrderByDescending(obj => obj.BasePrice).Last();
-        }
-        public Starship StarShipSearcher(int id, string brandname, string weaponname)
-        {
-
-            return null;
         }
     }
 }

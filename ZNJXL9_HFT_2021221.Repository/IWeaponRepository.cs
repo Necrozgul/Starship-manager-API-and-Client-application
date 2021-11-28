@@ -8,10 +8,12 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
-    public interface IWeaponRepository : IRepository<Weapon>
+    public interface IWeaponRepository
     {
-        void Update(Weapon obj);
+        void Create(Weapon weapon);
         void Delete(int id);
-        void Create(Weapon obj);
+        Weapon Read(int id);
+        IQueryable<Weapon> ReadAll();
+        void Update(Weapon weapon);
     }
 }

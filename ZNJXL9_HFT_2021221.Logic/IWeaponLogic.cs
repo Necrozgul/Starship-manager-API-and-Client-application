@@ -9,13 +9,12 @@ namespace ZNJXL9_HFT_2021221.Logic
 {
     public interface IWeaponLogic
     {
-        Weapon GetOne(int id);
-        IEnumerable<Weapon> GetAll();
+        Weapon Read(int id);
+        IEnumerable<Weapon> ReadAll();
         void Create(Weapon obj);
         void Update(Weapon obj);
         void Delete(int id);
 
-        //NON CRUD Methods (5)
         Weapon MostUsedWeapon();
     }
 }

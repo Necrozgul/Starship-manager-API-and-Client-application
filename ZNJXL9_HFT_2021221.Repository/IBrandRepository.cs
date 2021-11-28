@@ -8,10 +8,12 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
-    public interface IBrandRepository : IRepository<Brand>
+    public interface IBrandRepository
     {
-        void Update(Brand obj);
+        void Create(Brand brand);
         void Delete(int id);
-        void Create(Brand obj);
+        Brand Read(int id);
+        IQueryable<Brand> ReadAll();
+        void Update(Brand brand);
     }
 }

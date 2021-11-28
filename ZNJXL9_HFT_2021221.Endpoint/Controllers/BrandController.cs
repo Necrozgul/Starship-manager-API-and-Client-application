@@ -25,13 +25,13 @@ namespace ZNJXL9_HFT_2021221.Endpoint
         [HttpGet]
         public IEnumerable<Brand> Get()
         {
-            return logic.GetAll();
+            return logic.ReadAll();
         }
 
         [HttpGet("{id}")]
         public Brand Get(int id)
         {
-            return logic.GetOne(id);
+            return logic.Read(id);
         }
 
         [HttpPost]

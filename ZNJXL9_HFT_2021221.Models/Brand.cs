@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace ZNJXL9_HFT_2021221.Models
 {
-    [Table("brands")]
     public class Brand
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        // Part 2
-        //[Column(Order = 0)]
         public int Id { get; set; }
 
-        [MaxLength(100)]
-        [Required]
         public string Name { get; set; }
 
         [NotMapped]

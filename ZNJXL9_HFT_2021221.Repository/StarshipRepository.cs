@@ -9,18 +9,21 @@ using ZNJXL9_HFT_2021221.Models;
 
 namespace ZNJXL9_HFT_2021221.Repository
 {
-    //CRUD : Create, Read, ReadAll, Update, Delete
-    public class StarshipRepository :
-        Repository<Starship>, IStarshipRepository
+    public class StarshipRepository : IStarshipRepository
     {
-        public StarshipRepository(DbContext ctx) : base(ctx) { }
 
-        public override Starship GetOne(int id)
+        XYZDbContext db;
+        public StarshipRepository(XYZDbContext db)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            this.db = db;  
         }
 
-        public override void Create(Starship obj)
+        public Starship Read(int id)
+        {
+            return db.Starships.FirstOrDefault(t => t.Id == id);
+        }
+
+        public void Create(Starship obj)
         {
             var context = new XYZDbContext();
             var s = new Starship
@@ -35,22 +38,22 @@ namespace ZNJXL9_HFT_2021221.Repository
             context.SaveChanges();
         }
 
-        public override void Delete(int id)
+        public void Delete(int id)
         {
-            var x = GetOne(id);
+            var x = Read(id);
             if (x == null)
             {
                 throw new InvalidOperationException(
                     "Starship not found"
                 );
             }
-            ctx.Remove(x);
-            ctx.SaveChanges();
+            db.Remove(x);
+            db.SaveChanges();
         }
 
-        public override void Update(Starship obj)
+        public void Update(Starship obj)
         {
-            var s = GetOne(obj.Id);
+            var s = Read(obj.Id);
             if (s == null)
             {
                 throw new InvalidOperationException(
@@ -61,7 +64,12 @@ namespace ZNJXL9_HFT_2021221.Repository
             s.Model = obj.Model;
             s.BrandId = obj.BrandId;
             s.WeaponId = obj.WeaponId;
-            ctx.SaveChanges();
+            db.SaveChanges();
+        }
+
+        public IQueryable<Starship> ReadAll()
+        {
+            return db.Starships;
         }
     }
 }

@@ -161,7 +161,7 @@ namespace ZNJXL9_HFT_2021221.Test
             [Test]
             public void GetAllBrandTest()
             {
-                Assert.That(() => bl.GetAll(), Throws.Nothing);
+                Assert.That(() => bl.ReadAll(), Throws.Nothing);
             }
             [Test]
             public void MostUsedBrandTest()

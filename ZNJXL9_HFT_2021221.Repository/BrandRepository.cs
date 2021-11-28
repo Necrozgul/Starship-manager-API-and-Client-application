@@ -10,46 +10,40 @@ using ZNJXL9_HFT_2021221.Data;
 namespace ZNJXL9_HFT_2021221.Repository
 {
     //Crud: Create, Read, ReadAll, Update, Delete
-    public class BrandRepository :
-        Repository<Brand>, IBrandRepository
+    public class BrandRepository : IBrandRepository
     {
-        public BrandRepository(DbContext ctx) : base(ctx) { }
-
-        public override Brand GetOne(int id)
+        XYZDbContext db;
+        public BrandRepository(XYZDbContext db)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
-        }
-        public override void Create(Brand obj)
-        {
-            ctx.Add(obj);
-            ctx.SaveChanges();
+            this.db = db;
         }
 
-        public override void Delete(int id)
+        public Brand Read(int id)
         {
-            var x = GetOne(id);
-            if (x == null)
-            {
-                throw new InvalidOperationException(
-                    "Brand not found"
-                );
-            }
-            ctx.Remove(x);
-            ctx.SaveChanges();
+            return db.Brands.FirstOrDefault(t => t.Id == id);
+        }
+        public void Create(Brand obj)
+        {
+            db.Brands.Add(obj);
+            db.SaveChanges();
         }
 
-        public override void Update(Brand obj)
+        public void Delete(int id)
         {
-            var s = GetOne(obj.Id);
-            if (s == null)
-            {
-                throw new InvalidOperationException(
-                    "Brand not found"
-                );
-            }
-            s.Name = obj.Name;
-            ctx.SaveChanges();
+            db.Remove(Read(id));
+            db.SaveChanges();
         }
 
+        public void Update(Brand obj)
+        {
+            var oldbrand = Read(obj.Id);
+            oldbrand.Name = obj.Name;
+            db.SaveChanges();
+        }
+
+        public IQueryable<Brand> ReadAll()
+        {
+            return db.Brands;
+        }
     }
 }
