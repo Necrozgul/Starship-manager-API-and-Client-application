@@ -20,14 +20,12 @@ namespace ZNJXL9_HFT_2021221.Endpoint
             this.cl = cl;
         }
 
-        // stat/avgprice
         [HttpGet]
         public double AVGPrice()
         {
             return cl.AVGPrice();
         }
 
-        // stat/avgpricebybrands
         [HttpGet]
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
         {

@@ -34,8 +34,9 @@ namespace ZNJXL9_HFT_2021221.Client
                         Console.WriteLine(info);
                         break;
                     case ConsoleKey.D2:
-                        MenuModifyItem(restService);
-                        Console.WriteLine(info);
+                        //MenuModifyItem(restService);
+                        Console.WriteLine("Under Construction");
+                        //Console.WriteLine(info);
                         break;
                     case ConsoleKey.D3:
                         MenuRemoveItem(restService);
@@ -108,7 +109,43 @@ namespace ZNJXL9_HFT_2021221.Client
         }
         static void MenuModifyItem(RestService restService)
         {
-            Console.WriteLine("\nThis function is not ready yet.");
+            //Console.WriteLine("\nGive the name of the table: (starship,brand,weapon)");
+            //string tabblename = Console.ReadLine();
+            //if (tabblename == "starship")
+            //{
+            //    Console.WriteLine("[Editing]\nType id here:");
+            //    int id = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("Starship name: ");
+            //    string name = Console.ReadLine();
+            //    Console.WriteLine("Weapon id: ");
+            //    int weaponid = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("Brand id: ");
+            //    int brandid = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("Price: ");
+            //    int price = int.Parse(Console.ReadLine());
+            //    restService.Put(new Starship() { Id = id, Model = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
+            //}
+            //else if (tabblename == "brand")
+            //{
+            //    Console.WriteLine("[Editing]\nType id here:");
+            //    int id = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("Brand Name: ");
+            //    string name = Console.ReadLine();
+            //    restService.Put(new Brand() {Id = id, Name = name }, tabblename);
+            //}
+            //else if (tabblename == "weapon")
+            //{
+            //    Console.WriteLine("[Editing]\nType id here:");
+            //    int id = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("Weapon Name: ");
+            //    string name = Console.ReadLine();
+            //    restService.Post(new Weapon () {Id = id, Name = name }, tabblename);
+            //}
+            //else
+            //{
+            //    throw new ArgumentException("There is no table with that name");
+
+            //}
 
         }
         static void MenuRemoveItem(RestService restService)
