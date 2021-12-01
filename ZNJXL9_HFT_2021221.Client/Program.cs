@@ -108,9 +108,9 @@ namespace ZNJXL9_HFT_2021221.Client
         {
             Console.WriteLine("################  Menu  ################");
             Console.WriteLine("Press the buttons on your keyboard: ");
-            Console.WriteLine("[1] Adding item.");
-            Console.WriteLine("[2] Modify item.");
-            Console.WriteLine("[3] Remove item.");
+            Console.WriteLine("[1] Adding item");
+            Console.WriteLine("[2] Modify item");
+            Console.WriteLine("[3] Remove item");
             Console.WriteLine("[4] List of the specific items");
             Console.WriteLine("[A] Average Starship Price");
             Console.WriteLine("[Z] Most Expensive Starship");
