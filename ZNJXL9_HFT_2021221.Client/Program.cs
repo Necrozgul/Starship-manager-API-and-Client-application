@@ -15,7 +15,7 @@ namespace ZNJXL9_HFT_2021221.Client
             var brands = restService.Get<Brand>("brand");
             var starships = restService.Get<Starship>("starship");
             var weapons = restService.Get<Weapon>("weapon");
-
+            #region Probastarships
             //restService.Post<Starship>(new Starship()
             //{
             //    Model = "Model7",
@@ -33,7 +33,7 @@ namespace ZNJXL9_HFT_2021221.Client
             //    BasePrice = 15,
 
             //},"starship");
-
+            #endregion
             MenuShow();
             ConsoleMenu(restService);
             
@@ -67,9 +67,22 @@ namespace ZNJXL9_HFT_2021221.Client
                         info = ListItems(restService);
                         Console.WriteLine(info);
                         break;
+                    case ConsoleKey.A:
+                        MenuAVGPrice(restService);
+                        Console.WriteLine(info);
+                        break;
                     case ConsoleKey.M:
-                        //MenuMostExpensiveStarship(restService);
-                            break;
+                        MenuMostExpensiveStarship(restService);
+                        Console.WriteLine(info);
+                        break;
+                    case ConsoleKey.E:
+                        MenuCheapestStarship(restService);
+                        Console.WriteLine(info);
+                        break;
+                    case ConsoleKey.B:
+                        MenuAveragePriceByBrand(restService);
+                        Console.WriteLine(info);
+                        break;
                     case ConsoleKey.C:
                         Console.Clear();
                         MenuShow();
@@ -91,7 +104,10 @@ namespace ZNJXL9_HFT_2021221.Client
             Console.WriteLine("[2] Modify item.");
             Console.WriteLine("[3] Remove item.");
             Console.WriteLine("[4] List of the specific items");
+            Console.WriteLine("[A] Average Starship Price");
             Console.WriteLine("[M] Most Expensive Starship");
+            Console.WriteLine("[E] Cheapest starship");
+            Console.WriteLine("[B] AveragePriceByBrand");
             Console.WriteLine("[c] Clear the Console");
             Console.WriteLine("[x] stop the program");
             Console.WriteLine("#########################################");
@@ -213,9 +229,27 @@ namespace ZNJXL9_HFT_2021221.Client
         }
         static void MenuAveragePriceByBrand(RestService restService) 
         {
-            var MostExpensiveStarship =
-                restService.Get<KeyValuePair<string, double>> ("stat/mostexpensivestarship");
-            Console.WriteLine(MostExpensiveStarship);
+            var x=
+                restService.Get<KeyValuePair<string, double>> ("stat/averagepricebybrand");
+            Console.WriteLine(x);
+        }
+        static void MenuMostExpensiveStarship(RestService restService)
+        {
+            Starship x = restService.GetSingle<Starship>("stat/mostexpensivestarship");
+            Console.WriteLine("\nThe most expensive starship:");
+            Console.WriteLine(x);
+        }
+        static void MenuCheapestStarship(RestService restService)
+        {
+            Starship x = restService.GetSingle<Starship>("stat/cheapeststarship");
+            Console.WriteLine("\nthe Ceapest Starship:");
+            Console.WriteLine(x);
+        }
+        static void MenuAVGPrice(RestService restService)
+        {
+            var x = restService.GetSingle<double>("stat/avgprice");
+            Console.WriteLine("Average price of the starships:");
+            Console.WriteLine(x);
         }
     }
 }
