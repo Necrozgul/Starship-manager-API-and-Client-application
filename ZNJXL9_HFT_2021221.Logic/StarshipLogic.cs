@@ -33,7 +33,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             {
                 throw new ErrorException("Negative price is not allowed");
             }
-            if (starship.Model.Trim().Length >0)
+            if (starship.Model.Trim().Length < 0)
             {
                 throw new Exception("Starship name cant be empty!");
             }
