@@ -103,7 +103,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             return elements.OrderByDescending(obj => obj.BasePrice).Last();
         }
         //Többtáblás lekérdezés
-        public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrand()
         {
             return from x in starshipRepository.ReadAll()
                    group x by x.Brand.Name into g
