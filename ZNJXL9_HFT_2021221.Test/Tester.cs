@@ -18,6 +18,7 @@ namespace ZNJXL9_HFT_2021221.Test
         [TestFixture]
         public class TestWithMock
         {
+            #region MOQ-Setup
             //Érdemes lenne normál teszteket írni... 
             StarshipLogic cl;
             BrandLogic bl;
@@ -79,23 +80,9 @@ namespace ZNJXL9_HFT_2021221.Test
                     }.AsQueryable());
                 wl = new WeaponLogic(mockWeaponRepository.Object);
             }
-            [Test]
-            public void AVGPriceTest()
-            {
-                var result = cl.AVGPrice();
-                Assert.That(result, Is.EqualTo(200));
-            }
-            [Test]
-            public void AVGPriceByModelTest()
-            {
-                //ACT
-                var result = cl.AVGPriceByModels().ToArray();
-
-                //ASSERT
-                Assert.That(result[0],
-                    Is.EqualTo(new KeyValuePair<string, double>
-                    ("ModelName", 300)));
-            }
+            #endregion
+            
+            #region CREATE
             [TestCase(3000, true)]
             [TestCase(2000, true)]
             public void CreateStarshipTest(int price, bool result)
@@ -116,34 +103,7 @@ namespace ZNJXL9_HFT_2021221.Test
                         BasePrice = price
                     }), Throws.Exception);
                 }
-
             }
-            
-            [Test]            
-            public void GetOneStarshipTest()
-            {
-                Assert.That(() => cl.Read(1), Throws.Nothing);
-            }
-            [TestCase(1,true)]
-            [TestCase(2,false)]
-            public void GetTheMostExpensiveStarshipTest(int id, bool r)
-            {
-                var result=  cl.MostExpensiveStarship();
-                Assert.That((result.Id == id)==r);                
-            }
-            [TestCase(1,true)]
-            [TestCase(2,false),]
-            public void GetTheCheapestStarShip(int id, bool r)
-            {
-                var result = cl.MostExpensiveStarship();
-                Assert.That((result.Id == id)==r);
-            }
-            [Test]
-            public void GetAllStarshipTest()
-            {
-                Assert.That(() => cl.ReadAll(), Throws.Nothing);
-            }
-
             [Test]
             public void CreateBrandTest()
             {
@@ -154,21 +114,6 @@ namespace ZNJXL9_HFT_2021221.Test
                 }), Throws.Nothing);
             }
             [Test]
-            public void GetOneBrandTest()
-            {
-                Assert.That(() => bl.Read(1), Throws.Nothing);
-            }
-            [Test]
-            public void GetAllBrandTest()
-            {
-                Assert.That(() => bl.ReadAll(), Throws.Nothing);
-            }
-            [Test]
-            public void MostUsedBrandTest()
-            {
-                Assert.That(bl.MostUsedBrand().Name=="Testbrand1");
-            }
-            [Test]            
             public void CreateWeaponTest()
             {
                 Assert.That(() => wl.Create(new Weapon()
@@ -177,15 +122,25 @@ namespace ZNJXL9_HFT_2021221.Test
                     Id = 1
                 }), Throws.Nothing);
             }
+            #endregion
+            
+            #region NON-CRUD
             [Test]
-            public void GetOneWeaponTest()
+            public void AVGPriceTest()
             {
-                Assert.That(() => wl.Read(1), Throws.Nothing);
+                var result = cl.AVGPrice();
+                Assert.That(result, Is.EqualTo(200));
             }
             [Test]
-            public void GetAllWeaponTest()
+            public void AVGPriceByModelTest()
             {
-                Assert.That(() => wl.ReadAll(), Throws.Nothing);
+                //ACT
+                var result = cl.AVGPriceByModels().ToArray();
+
+                //ASSERT
+                Assert.That(result[0],
+                    Is.EqualTo(new KeyValuePair<string, double>
+                    ("ModelName", 300)));
             }
             [Test]
             public void MostUsedWeaponTest()
@@ -197,6 +152,65 @@ namespace ZNJXL9_HFT_2021221.Test
             {
                 Assert.That(() => cl.GetModelAverages(), Throws.Nothing);
             }
+            [TestCase(1, true)]
+            [TestCase(2, false),]
+            public void GetTheCheapestStarShip(int id, bool r)
+            {
+                var result = cl.CheapestStarship();
+                Assert.That((result.Id == id) == r);
+            }
+            [Test]
+            public void MostUsedBrandTest()
+            {
+                Assert.That(bl.MostUsedBrand().Name == "Testbrand1");
+            }
+            [TestCase(1, true)]
+            [TestCase(2, false)]
+            public void GetTheMostExpensiveStarshipTest(int id, bool r)
+            {
+                var result = cl.MostExpensiveStarship();
+                Assert.That((result.Id == id) == r);
+            }
+
+            #endregion
+            
+            #region FREE
+            [Test]            
+            public void GetOneStarshipTest()
+            {
+                Assert.That(() => cl.Read(1), Throws.Nothing);
+            }
+            
+            [Test]
+            public void GetAllStarshipTest()
+            {
+                Assert.That(() => cl.ReadAll(), Throws.Nothing);
+            }
+
+            [Test]
+            public void GetOneBrandTest()
+            {
+                Assert.That(() => bl.Read(1), Throws.Nothing);
+            }
+            [Test]
+            public void GetAllBrandTest()
+            {
+                Assert.That(() => bl.ReadAll(), Throws.Nothing);
+            }
+
+            
+            [Test]
+            public void GetOneWeaponTest()
+            {
+                Assert.That(() => wl.Read(1), Throws.Nothing);
+            }
+            [Test]
+            public void GetAllWeaponTest()
+            {
+                Assert.That(() => wl.ReadAll(), Throws.Nothing);
+            }
+            #endregion
+
         }
     }
 }

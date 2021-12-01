@@ -19,7 +19,6 @@ namespace ZNJXL9_HFT_2021221.Logic
         IEnumerable<KeyValuePair<string, double>> AVGPriceByModels();
         Starship MostExpensiveStarship();
         Starship CheapestStarship();
-        //Starship StarShipSearcher(int id, string brandname, string weaponname);
 
 
 

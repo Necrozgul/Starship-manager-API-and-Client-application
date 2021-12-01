@@ -33,11 +33,15 @@ namespace ZNJXL9_HFT_2021221.Logic
             {
                 throw new ErrorException("Negative price is not allowed");
             }
+            if (starship.Model.Trim().Length >0)
+            {
+                throw new Exception("Starship name cant be empty!");
+            }
             starshipRepository.Create(starship);
         }
         public void Update(Starship obj)
         {
-            if (obj != null && obj.Model != "")
+            if (obj != null && obj.Model.Trim().Length >0)
             {
                 starshipRepository.Update(obj);
             }
@@ -55,7 +59,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
             else
             {
-                throw new ErrorException("There is no Starship with thad id");
+                throw new Exception("There is no Starship with thad id");
             }
 
         }
@@ -98,5 +102,29 @@ namespace ZNJXL9_HFT_2021221.Logic
             var elements = ReadAll();
             return elements.OrderByDescending(obj => obj.BasePrice).Last();
         }
+        //Többtáblás lekérdezés
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
+        {
+            return from x in starshipRepository.ReadAll()
+                   group x by x.Brand.Name into g
+                   select new KeyValuePair<string, double>
+                   (g.Key, g.Average((t => (double)t.BasePrice)));
+        }
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByWeapon()
+        {
+            if (starshipRepository.ReadAll() != null)
+            {
+                return from x in starshipRepository.ReadAll()
+                       group x by x.Weapon.Name into g
+                       select new KeyValuePair<string, double>
+                       (g.Key, g.Average((t => (double)t.BasePrice)));
+            }
+            else
+            {
+                throw new Exception("Nincsen ada szóval nem lehet elvégezni a műveletet!");
+            }
+            
+        }
+
     }
 }
