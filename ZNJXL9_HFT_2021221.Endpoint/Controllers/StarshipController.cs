@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
 
@@ -19,10 +15,9 @@ namespace ZNJXL9_HFT_2021221.Endpoint
         {
             this.cl = cl;
         }
-
         // GET: /car
         [HttpGet]
-        public IEnumerable<Starship> Get()
+        public IEnumerable<Starship> GetAll()
         {
             return cl.ReadAll();
         }

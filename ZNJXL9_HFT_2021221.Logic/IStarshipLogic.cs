@@ -17,6 +17,8 @@ namespace ZNJXL9_HFT_2021221.Logic
         IList<AveragesResult> GetModelAverages();
         double AVGPrice();
         IEnumerable<KeyValuePair<string, double>> AVGPriceByModels();
+        IEnumerable<KeyValuePair<string, double>> AVGPriceByWeapon();
+        IEnumerable<KeyValuePair<string, double>> AVGPriceByBrand();
         Starship MostExpensiveStarship();
         Starship CheapestStarship();
 

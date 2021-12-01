@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using ZNJXL9_HFT_2021221.Models;
 
@@ -14,29 +15,27 @@ namespace ZNJXL9_HFT_2021221.Client
             var brands = restService.Get<Brand>("brand");
             var starships = restService.Get<Starship>("starship");
             var weapons = restService.Get<Weapon>("weapon");
-            foreach (var item in starships)
-            {
-                Console.WriteLine(item.ToString());
-            }
-            restService.Post<Starship>(new Starship()
-            {
-                Model = "Model7",
-                WeaponId = 1,
-                BrandId = 1,
-                BasePrice = 15,
 
-            }, "starship");
-            restService.Put<Starship>(new Starship()
-            {
-                Id = 7,
-                Model = "editedmodel",
-                WeaponId = 1,
-                BrandId= 1,
-                BasePrice = 15,
+            //restService.Post<Starship>(new Starship()
+            //{
+            //    Model = "Model7",
+            //    WeaponId = 1,
+            //    BrandId = 1,
+            //    BasePrice = 15,
 
-            },"starship");
-            //MenuShow();
-            //ConsoleMenu(restService);
+            //}, "starship");
+            //restService.Put<Starship>(new Starship()
+            //{
+            //    Id = 7,
+            //    Model = "editedmodel",
+            //    WeaponId = 1,
+            //    BrandId= 1,
+            //    BasePrice = 15,
+
+            //},"starship");
+
+            MenuShow();
+            ConsoleMenu(restService);
             
         }
         static void ConsoleMenu(RestService restService)
@@ -55,9 +54,9 @@ namespace ZNJXL9_HFT_2021221.Client
                         Console.WriteLine(info);
                         break;
                     case ConsoleKey.D2:
-                        //MenuModifyItem(restService);
-                        Console.WriteLine("Under Construction");
-                        //Console.WriteLine(info);
+                        MenuModifyItem(restService);
+                        //Console.WriteLine("Under Construction");
+                        Console.WriteLine(info);
                         break;
                     case ConsoleKey.D3:
                         MenuRemoveItem(restService);
@@ -68,6 +67,9 @@ namespace ZNJXL9_HFT_2021221.Client
                         info = ListItems(restService);
                         Console.WriteLine(info);
                         break;
+                    case ConsoleKey.M:
+                        //MenuMostExpensiveStarship(restService);
+                            break;
                     case ConsoleKey.C:
                         Console.Clear();
                         MenuShow();
@@ -89,6 +91,7 @@ namespace ZNJXL9_HFT_2021221.Client
             Console.WriteLine("[2] Modify item.");
             Console.WriteLine("[3] Remove item.");
             Console.WriteLine("[4] List of the specific items");
+            Console.WriteLine("[M] Most Expensive Starship");
             Console.WriteLine("[c] Clear the Console");
             Console.WriteLine("[x] stop the program");
             Console.WriteLine("#########################################");
@@ -130,43 +133,43 @@ namespace ZNJXL9_HFT_2021221.Client
         }
         static void MenuModifyItem(RestService restService)
         {
-            //Console.WriteLine("\nGive the name of the table: (starship,brand,weapon)");
-            //string tabblename = Console.ReadLine();
-            //if (tabblename == "starship")
-            //{
-            //    Console.WriteLine("[Editing]\nType id here:");
-            //    int id = int.Parse(Console.ReadLine());
-            //    Console.WriteLine("Starship name: ");
-            //    string name = Console.ReadLine();
-            //    Console.WriteLine("Weapon id: ");
-            //    int weaponid = int.Parse(Console.ReadLine());
-            //    Console.WriteLine("Brand id: ");
-            //    int brandid = int.Parse(Console.ReadLine());
-            //    Console.WriteLine("Price: ");
-            //    int price = int.Parse(Console.ReadLine());
-            //    restService.Put(new Starship() { Id = id, Model = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
-            //}
-            //else if (tabblename == "brand")
-            //{
-            //    Console.WriteLine("[Editing]\nType id here:");
-            //    int id = int.Parse(Console.ReadLine());
-            //    Console.WriteLine("Brand Name: ");
-            //    string name = Console.ReadLine();
-            //    restService.Put(new Brand() {Id = id, Name = name }, tabblename);
-            //}
-            //else if (tabblename == "weapon")
-            //{
-            //    Console.WriteLine("[Editing]\nType id here:");
-            //    int id = int.Parse(Console.ReadLine());
-            //    Console.WriteLine("Weapon Name: ");
-            //    string name = Console.ReadLine();
-            //    restService.Post(new Weapon () {Id = id, Name = name }, tabblename);
-            //}
-            //else
-            //{
-            //    throw new ArgumentException("There is no table with that name");
+            Console.WriteLine("\nGive the name of the table: (starship,brand,weapon)");
+            string tabblename = Console.ReadLine();
+            if (tabblename == "starship")
+            {
+                Console.WriteLine("[Editing]\nType id here:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Starship name: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Weapon id: ");
+                int weaponid = int.Parse(Console.ReadLine());
+                Console.WriteLine("Brand id: ");
+                int brandid = int.Parse(Console.ReadLine());
+                Console.WriteLine("Price: ");
+                int price = int.Parse(Console.ReadLine());
+                restService.Put(new Starship() { Id = id, Model = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
+            }
+            else if (tabblename == "brand")
+            {
+                Console.WriteLine("[Editing]\nType id here:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Brand Name: ");
+                string name = Console.ReadLine();
+                restService.Put(new Brand() { Id = id, Name = name }, tabblename);
+            }
+            else if (tabblename == "weapon")
+            {
+                Console.WriteLine("[Editing]\nType id here:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Weapon Name: ");
+                string name = Console.ReadLine();
+                restService.Post(new Weapon() { Id = id, Name = name }, tabblename);
+            }
+            else
+            {
+                throw new ArgumentException("There is no table with that name");
 
-            //}
+            }
 
         }
         static void MenuRemoveItem(RestService restService)
@@ -207,6 +210,12 @@ namespace ZNJXL9_HFT_2021221.Client
                 }
             }
             return data_;
+        }
+        static void MenuAveragePriceByBrand(RestService restService) 
+        {
+            var MostExpensiveStarship =
+                restService.Get<KeyValuePair<string, double>> ("stat/mostexpensivestarship");
+            Console.WriteLine(MostExpensiveStarship);
         }
     }
 }
