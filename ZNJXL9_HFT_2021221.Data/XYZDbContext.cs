@@ -34,11 +34,12 @@ namespace ZNJXL9_HFT_2021221.Data
                 entity.HasOne(starship => starship.Brand)
                     .WithMany(brand => brand.Starships)
                     .HasForeignKey(starship => starship.BrandId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    ;
                 entity.HasOne(starship => starship.Weapon)
                     .WithMany(weapon => weapon.Starships)
                     .HasForeignKey(starship => starship.WeaponId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             Brand cec = new Brand() { Id = 1, Name = "CEC" };

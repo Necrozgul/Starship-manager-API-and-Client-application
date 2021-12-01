@@ -37,7 +37,7 @@ namespace ZNJXL9_HFT_2021221.Endpoint
             logic.Create(value);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] Brand value)
         {
             logic.Update(value);

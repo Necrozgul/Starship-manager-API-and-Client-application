@@ -34,7 +34,7 @@ namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
             logic.Create(value);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] Weapon value)
         {
             logic.Update(value);

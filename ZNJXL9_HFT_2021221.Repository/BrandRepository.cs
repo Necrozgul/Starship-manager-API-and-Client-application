@@ -36,6 +36,7 @@ namespace ZNJXL9_HFT_2021221.Repository
 
         public void Update(Brand obj)
         {
+            
             var oldbrand = Read(obj.Id);
             oldbrand.Name = obj.Name;
             db.SaveChanges();
