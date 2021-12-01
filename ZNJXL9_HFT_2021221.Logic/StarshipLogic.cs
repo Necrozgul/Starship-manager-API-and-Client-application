@@ -70,28 +70,6 @@ namespace ZNJXL9_HFT_2021221.Logic
 
 
         //NON CRUD
-        public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
-        {
-            return from x in starshipRepository.ReadAll()
-                   group x by x.Model into g
-                   select new KeyValuePair<string, double>
-                   (g.Key, g.Average(t => t.BasePrice) ?? 0);
-        }
-        
-        public IList<AveragesResult> GetModelAverages()
-        {
-            var q = from s in starshipRepository.ReadAll()
-                    group s
-                    by new { s.Id, s.Model }
-                    into grp
-                    select new AveragesResult()
-                    {
-                        ModelName = grp.Key.Model,
-                        AveragePrice = grp.Average(x => x.BasePrice) ?? 0
-                    };
-            return q.ToList();
-        }
-
         public Starship MostExpensiveStarship()
         {
             var elements = ReadAll();
@@ -100,15 +78,30 @@ namespace ZNJXL9_HFT_2021221.Logic
         public Starship CheapestStarship()
         {
             var elements = ReadAll();
-            return elements.OrderByDescending(obj => obj.BasePrice).Last();
+            if (elements != null)
+            {
+                return elements.OrderByDescending(obj => obj.BasePrice).Last();
+            }
+            else
+            {
+                throw new Exception("Sajnos nincsen adat a rendszerben, szóval nem értelmezhető a számítás!");
+            }
+            
         }
         //Többtáblás lekérdezés
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrand()
         {
-            return from x in starshipRepository.ReadAll()
-                   group x by x.Brand.Name into g
-                   select new KeyValuePair<string, double>
-                   (g.Key, g.Average((t => (double)t.BasePrice)));
+            if (starshipRepository.ReadAll() != null)
+            {
+                return from x in starshipRepository.ReadAll()
+                       group x by x.Brand.Name into g
+                       select new KeyValuePair<string, double>
+                       (g.Key, g.Average((t => (double)t.BasePrice)));
+            }
+            else
+            {
+                throw new Exception("Nincsen adat szóval nem lehet elvégezni a műveletet!");
+            }
         }
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByWeapon()
         {
@@ -121,9 +114,29 @@ namespace ZNJXL9_HFT_2021221.Logic
             }
             else
             {
-                throw new Exception("Nincsen ada szóval nem lehet elvégezni a műveletet!");
+                throw new Exception("Nincsen adat szóval nem lehet elvégezni a műveletet!");
             }
-            
+        }
+        public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
+        {
+            return from x in starshipRepository.ReadAll()
+                   group x by x.Model into g
+                   select new KeyValuePair<string, double>
+                   (g.Key, g.Average(t => t.BasePrice) ?? 0);
+        }
+
+        public IList<AveragesResult> GetModelAverages()
+        {
+            var q = from s in starshipRepository.ReadAll()
+                    group s
+                    by new { s.Id, s.Model }
+                    into grp
+                    select new AveragesResult()
+                    {
+                        ModelName = grp.Key.Model,
+                        AveragePrice = grp.Average(x => x.BasePrice) ?? 0
+                    };
+            return q.ToList();
         }
 
     }
