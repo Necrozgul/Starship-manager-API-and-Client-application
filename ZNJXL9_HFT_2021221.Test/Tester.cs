@@ -152,8 +152,8 @@ namespace ZNJXL9_HFT_2021221.Test
             {
                 Assert.That(() => cl.GetModelAverages(), Throws.Nothing);
             }
-            [TestCase(1, true)]
-            [TestCase(2, false),]
+            [TestCase(1, false)]
+            [TestCase(2, true),]
             public void GetTheCheapestStarShip(int id, bool r)
             {
                 var result = cl.CheapestStarship();
