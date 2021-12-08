@@ -130,6 +130,7 @@ namespace ZNJXL9_HFT_2021221.Test
             {
                 var result = cl.AVGPrice();
                 Assert.That(result, Is.EqualTo(200));
+
             }
             [Test]
             public void AVGPriceByModelTest()
