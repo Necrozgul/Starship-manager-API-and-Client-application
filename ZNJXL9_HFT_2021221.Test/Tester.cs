@@ -68,7 +68,6 @@ namespace ZNJXL9_HFT_2021221.Test
                     }.AsQueryable());
                 bl = new BrandLogic(mockBrandRepository.Object);
 
-                //Weapon
                 Mock<IWeaponRepository> mockWeaponRepository =
                     new Mock<IWeaponRepository>();
                 mockWeaponRepository.Setup((t) => t.Create(It.IsAny<Weapon>()));
