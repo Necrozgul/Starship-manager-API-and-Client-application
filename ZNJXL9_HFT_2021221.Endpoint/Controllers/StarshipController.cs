@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
 
-namespace ZNJXL9_HFT_2021221.Endpoint
+namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]

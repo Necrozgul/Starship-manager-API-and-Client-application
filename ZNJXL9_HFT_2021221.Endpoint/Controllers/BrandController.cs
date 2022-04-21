@@ -1,14 +1,13 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using System.Collections.Generic;
 using ZNJXL9_HFT_2021221.Endpoint.Services;
+using System.Collections.Generic;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ZNJXL9_HFT_2021221.Endpoint
+namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]

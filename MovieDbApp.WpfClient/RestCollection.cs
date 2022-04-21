@@ -407,9 +407,6 @@ namespace ZNJXL9_HFT_2021221.WpfClient
                     });
                 });
             }
-
         }
-
-
     }
 }
