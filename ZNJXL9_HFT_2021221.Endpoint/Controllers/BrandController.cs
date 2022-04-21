@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using ZNJXL9_HFT_2021221.Endpoint.Services;
 using ZNJXL9_HFT_2021221.Logic;
 using ZNJXL9_HFT_2021221.Models;
 
@@ -13,10 +15,12 @@ namespace ZNJXL9_HFT_2021221.Endpoint
     public class BrandController : ControllerBase
     {
         IBrandLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public BrandController(IBrandLogic brandLogic)
+        public BrandController(IBrandLogic brandLogic, IHubContext<SignalRHub> hub)
         {
             logic = brandLogic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -35,18 +39,21 @@ namespace ZNJXL9_HFT_2021221.Endpoint
         public void Post([FromBody] Brand value)
         {
             logic.Create(value);
+            this.hub.Clients.All.SendAsync("BrandCreated", value);
         }
 
         [HttpPut]
         public void Put([FromBody] Brand value)
         {
             logic.Update(value);
+            this.hub.Clients.All.SendAsync("ActorUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             logic.Delete(id);
+            this.hub.Clients.All.SendAsync("ActorDeleted", id);
         }
     }
 }
