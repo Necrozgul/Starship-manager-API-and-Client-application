@@ -52,7 +52,7 @@ namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
         public void Delete(int id)
         {
             logic.Delete(id);
-            this.hub.Clients.All.SendAsync("BrandDeleted", id);
+            this.hub.Clients.All.SendAsync("BrandDeleted", logic.Read(id));
         }
     }
 }
