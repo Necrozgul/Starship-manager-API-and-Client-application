@@ -64,7 +64,7 @@ namespace ZNJXL9_HFT_2021221.WpfClient
         {
             if (!IsInDesignMode)
             {
-                Brands = new RestCollection<Brand>("http://localhost:5000/", "brand", "hub");
+                Brands = new RestCollection<Brand>("http://localhost:53910/", "brand", "hub");
                 CreateActorCommand = new RelayCommand(() =>
                 {
                     Brands.Add(new Brand()
