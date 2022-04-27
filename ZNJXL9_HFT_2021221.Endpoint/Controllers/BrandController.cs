@@ -45,14 +45,14 @@ namespace ZNJXL9_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Brand value)
         {
             logic.Update(value);
-            this.hub.Clients.All.SendAsync("ActorUpdated", value);
+            this.hub.Clients.All.SendAsync("BrandUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             logic.Delete(id);
-            this.hub.Clients.All.SendAsync("ActorDeleted", id);
+            this.hub.Clients.All.SendAsync("BrandDeleted", id);
         }
     }
 }
