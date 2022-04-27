@@ -38,17 +38,17 @@ namespace ZNJXL9_HFT_2021221.WpfClient
                         
                     };
                     OnPropertyChanged();
-                    (DeleteActorCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (DeleteBrandCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
 
 
-        public ICommand CreateActorCommand { get; set; }
+        public ICommand CreateBrandCommand { get; set; }
 
-        public ICommand DeleteActorCommand { get; set; }
+        public ICommand DeleteBrandCommand { get; set; }
 
-        public ICommand UpdateActorCommand { get; set; }
+        public ICommand UpdateBrandCommand { get; set; }
 
         public static bool IsInDesignMode
         {
@@ -65,7 +65,7 @@ namespace ZNJXL9_HFT_2021221.WpfClient
             if (!IsInDesignMode)
             {
                 Brands = new RestCollection<Brand>("http://localhost:53910/", "brand", "hub");
-                CreateActorCommand = new RelayCommand(() =>
+                CreateBrandCommand = new RelayCommand(() =>
                 {
                     Brands.Add(new Brand()
                     {
@@ -73,7 +73,7 @@ namespace ZNJXL9_HFT_2021221.WpfClient
                     });
                 });
 
-                UpdateActorCommand = new RelayCommand(() =>
+                UpdateBrandCommand = new RelayCommand(() =>
                 {
                     try
                     {
@@ -86,7 +86,7 @@ namespace ZNJXL9_HFT_2021221.WpfClient
                     
                 });
 
-                DeleteActorCommand = new RelayCommand(() =>
+                DeleteBrandCommand = new RelayCommand(() =>
                 {
                     Brands.Delete(SelectedBrand.Id);
                 },
