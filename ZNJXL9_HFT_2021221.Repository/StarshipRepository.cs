@@ -29,7 +29,7 @@ namespace ZNJXL9_HFT_2021221.Repository
             var s = new Starship
             {
                 Id = obj.Id, //Ez a rész lehet felesleges
-                Model = obj.Model,
+                Name = obj.Name,
                 BasePrice = obj.BasePrice,
                 WeaponId = obj.WeaponId,
                 BrandId = obj.BrandId
@@ -61,7 +61,7 @@ namespace ZNJXL9_HFT_2021221.Repository
                 );
             }
             s.BasePrice = obj.BasePrice;
-            s.Model = obj.Model;
+            s.Name = obj.Name;
             s.BrandId = obj.BrandId;
             s.WeaponId = obj.WeaponId;
             db.SaveChanges();

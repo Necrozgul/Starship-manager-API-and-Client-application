@@ -17,9 +17,10 @@ namespace ZNJXL9_HFT_2021221.Models
 
         [MaxLength(100)]
         [Required]
-        public string Model { get; set; }
+        public string Name { get; set; }
 
         public int? BasePrice { get; set; }
+
 
         [NotMapped]
         [JsonIgnore]
@@ -37,7 +38,12 @@ namespace ZNJXL9_HFT_2021221.Models
 
         public override string ToString()
         {
-            return $"Id={Id} [{Model}] Price:{BasePrice} BrandId:{BrandId}, WeaponId:{WeaponId}";
+            return $"Id={Id} [{Name}] Price:{BasePrice} BrandId:{BrandId}, WeaponId:{WeaponId}";
+        }
+
+        public string Print()
+        {
+            return $"Id={Id} [{Name}] Price:{BasePrice} BrandId:{BrandId}, WeaponId:{WeaponId}";
         }
     }
 }

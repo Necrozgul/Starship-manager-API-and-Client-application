@@ -2,8 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:client="clr-namespace:ZNJXL9_HFT_2021221.WpfClient"
+             xmlns:viewModel="clr-namespace:ZNJXL9_HFT_2021221.WpfClient.MVVM.ViewModel"
+             xmlns:view="clr-namespace:ZNJXL9_HFT_2021221.WpfClient.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModel:BrandViewModel}">
+                <view:BrandWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:StarshipViewModel}">
+                <view:StarshipWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:WeaponViewModel}">
+                <view:WeaponWindow/>
+            </DataTemplate>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

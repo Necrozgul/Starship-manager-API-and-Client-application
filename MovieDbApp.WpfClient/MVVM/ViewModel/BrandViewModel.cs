@@ -7,9 +7,9 @@ using System.Windows;
 using System.Windows.Input;
 using ZNJXL9_HFT_2021221.Models;
 
-namespace ZNJXL9_HFT_2021221.WpfClient
+namespace ZNJXL9_HFT_2021221.WpfClient.MVVM.ViewModel
 {
-    public class MainWindowViewModel : ObservableRecipient
+    public class BrandViewModel : ObservableRecipient
     {
         private string errorMessage;
 
@@ -60,7 +60,7 @@ namespace ZNJXL9_HFT_2021221.WpfClient
         }
 
 
-        public MainWindowViewModel()
+        public BrandViewModel()
         {
             if (!IsInDesignMode)
             {

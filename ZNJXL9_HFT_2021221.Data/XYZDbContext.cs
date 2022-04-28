@@ -34,12 +34,12 @@ namespace ZNJXL9_HFT_2021221.Data
                 entity.HasOne(starship => starship.Brand)
                     .WithMany(brand => brand.Starships)
                     .HasForeignKey(starship => starship.BrandId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     ;
                 entity.HasOne(starship => starship.Weapon)
                     .WithMany(weapon => weapon.Starships)
                     .HasForeignKey(starship => starship.WeaponId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             Brand cec = new Brand() { Id = 1, Name = "CEC" };
@@ -51,12 +51,12 @@ namespace ZNJXL9_HFT_2021221.Data
             Weapon Protonbeambannon = new Weapon() { Id = 3, Name = "Proton Beam Cannon" };
             Weapon Orbitalautocannon = new Weapon() { Id = 4, Name = "Orbital Cannon" };
 
-            Starship kuatEclipse = new Starship() { Id = 1, BrandId = kuat.Id, BasePrice = 200, Model = "Eclipse", WeaponId = Orbitalautocannon.Id };
-            Starship kuatExecutor = new Starship() { Id = 2, BrandId = kuat.Id, BasePrice = 30, Model = "Executor", WeaponId = Orbitalautocannon.Id };
-            Starship cecYV666 = new Starship() { Id = 3, BrandId = cec.Id, BasePrice = 100, Model = "YV-666", WeaponId = Turbolaser.Id };
-            Starship cecVCX100 = new Starship() { Id = 4, BrandId = cec.Id, BasePrice = 150, Model = "VCX-150", WeaponId = Turbolaser.Id };
-            Starship cygnusXwing = new Starship() { Id = 5, BrandId = cygnus.Id, BasePrice = 20, Model = "XWing", WeaponId = Flacgun.Id };
-            Starship cygnusT4a = new Starship() { Id = 6, BrandId = cygnus.Id, BasePrice = 250, Model = "T-4A", WeaponId = Turbolaser.Id };
+            Starship kuatEclipse = new Starship() { Id = 1, BrandId = kuat.Id, BasePrice = 200, Name = "Eclipse", WeaponId = Orbitalautocannon.Id };
+            Starship kuatExecutor = new Starship() { Id = 2, BrandId = kuat.Id, BasePrice = 30, Name = "Executor", WeaponId = Orbitalautocannon.Id };
+            Starship cecYV666 = new Starship() { Id = 3, BrandId = cec.Id, BasePrice = 100, Name = "YV-666", WeaponId = Turbolaser.Id };
+            Starship cecVCX100 = new Starship() { Id = 4, BrandId = cec.Id, BasePrice = 150, Name = "VCX-150", WeaponId = Turbolaser.Id };
+            Starship cygnusXwing = new Starship() { Id = 5, BrandId = cygnus.Id, BasePrice = 20, Name = "XWing", WeaponId = Flacgun.Id };
+            Starship cygnusT4a = new Starship() { Id = 6, BrandId = cygnus.Id, BasePrice = 250, Name = "T-4A", WeaponId = Turbolaser.Id };
 
             mb.Entity<Starship>().HasData(kuatEclipse, kuatExecutor, cecYV666, cecVCX100, cygnusXwing, cygnusT4a);
             mb.Entity<Brand>().HasData(cec,cygnus,kuat);

@@ -39,7 +39,7 @@ namespace ZNJXL9_HFT_2021221.Test
                     {
                     new Starship()
                     {
-                        Model = "ModelName",
+                        Name = "ModelName",
                         BrandId = 0,
                         WeaponId = 1,
                         BasePrice = 300,
@@ -47,7 +47,7 @@ namespace ZNJXL9_HFT_2021221.Test
                     },
                     new Starship()
                     {
-                        Model = "ModelName2",
+                        Name = "ModelName2",
                         BrandId = 0,
                         WeaponId = 11,
                         BasePrice = 100,
@@ -90,7 +90,7 @@ namespace ZNJXL9_HFT_2021221.Test
                 {
                     Assert.That(() => cl.Create(new Starship()
                     {
-                        Model = "Astra",
+                        Name = "Astra",
                         BasePrice = price
                     }), Throws.Nothing);
                 }
@@ -98,7 +98,7 @@ namespace ZNJXL9_HFT_2021221.Test
                 {
                     Assert.That(() => cl.Create(new Starship()
                     {
-                        Model = "Astra",
+                        Name = "Astra",
                         BasePrice = price
                     }), Throws.Exception);
                 }

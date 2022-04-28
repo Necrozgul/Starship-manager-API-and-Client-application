@@ -1,0 +1,39 @@
+﻿<Window x:Class="ZNJXL9_HFT_2021221.WpfClient.MVVM.View.StarshipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZNJXL9_HFT_2021221.WpfClient.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Starship Editor" Height="450" Width="800">
+    <Grid>
+        <Grid.DataContext>
+            <local:StarshipViewModel/>
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Starships}" SelectedItem="{Binding SelectedStarship}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="Name" Background="LightBlue" Padding="1" />
+            <TextBox Text="{Binding SelectedStarship.Name}" Padding="5" Margin="0,0,0,5" />
+            <Label Content="BasePrice" Background="LightBlue" Padding="1" />
+            <TextBox Text="{Binding SelectedStarship.BasePrice}" Padding="5" Margin="0,0,0,5" />
+            <Label Content="BrandId" Background="LightBlue" Padding="1" />
+            <TextBox Text="{Binding SelectedStarship.Brand.Name}" Padding="5" Margin="0,0,0,5" />
+            <Label Content="WeaponId" Background="LightBlue" Padding="1" />
+            <TextBox Text="{Binding SelectedStarship.Weapon.Name}" Padding="5" Margin="0,0,0,5" />
+            <Button Content="Create" Command="{Binding CreateStarshipCommand}" Margin="10" Padding="10" />
+            <Button Content="Delete" Command="{Binding DeleteStarshipCommand}" Margin="10" Padding="10" />
+            <Button Content="Update" Command="{Binding UpdateStarshipCommand}" Margin="10" Padding="10" />
+            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>

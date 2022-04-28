@@ -139,7 +139,7 @@ namespace ZNJXL9_HFT_2021221.Client
                     int brandid = int.Parse(Console.ReadLine());
                     Console.WriteLine("Price: ");
                     int price = int.Parse(Console.ReadLine());
-                    restService.Post(new Starship() { Model = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
+                    restService.Post(new Starship() { Name = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
                 }
                 else if (tabblename == "brand")
                 {
@@ -182,7 +182,7 @@ namespace ZNJXL9_HFT_2021221.Client
                     int brandid = int.Parse(Console.ReadLine());
                     Console.WriteLine("Price: ");
                     int price = int.Parse(Console.ReadLine());
-                    restService.Put(new Starship() { Id = id, Model = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
+                    restService.Put(new Starship() { Id = id, Name = name, BrandId = brandid, WeaponId = weaponid, BasePrice = price }, tabblename);
                     Console.WriteLine("Editing was succesfull!");
                 }
                 else if (tabblename == "brand")

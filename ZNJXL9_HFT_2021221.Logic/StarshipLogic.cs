@@ -30,7 +30,7 @@ namespace ZNJXL9_HFT_2021221.Logic
             {
                 throw new ErrorException("Negative price is not allowed");
             }
-            if (starship.Model.Trim().Length < 0)
+            if (starship.Name.Trim().Length < 0)
             {
                 throw new Exception("Starship name cant be empty!");
             }
@@ -38,7 +38,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         }
         public void Update(Starship obj)
         {
-            if (obj != null && obj.Model.Trim().Length >0)
+            if (obj != null && obj.Name.Trim().Length >0)
             {
                 starshipRepository.Update(obj);
             }
@@ -117,7 +117,7 @@ namespace ZNJXL9_HFT_2021221.Logic
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByModels()
         {
             return from x in starshipRepository.ReadAll()
-                   group x by x.Model into g
+                   group x by x.Name into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.BasePrice) ?? 0);
         }
@@ -126,11 +126,11 @@ namespace ZNJXL9_HFT_2021221.Logic
         {
             var q = from s in starshipRepository.ReadAll()
                     group s
-                    by new { s.Id, s.Model }
+                    by new { s.Id, s.Name }
                     into grp
                     select new AveragesResult()
                     {
-                        ModelName = grp.Key.Model,
+                        ModelName = grp.Key.Name,
                         AveragePrice = grp.Average(x => x.BasePrice) ?? 0
                     };
             return q.ToList();
