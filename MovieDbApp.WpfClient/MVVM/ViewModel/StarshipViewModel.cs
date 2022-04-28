@@ -35,6 +35,9 @@ namespace ZNJXL9_HFT_2021221.WpfClient.MVVM.ViewModel
                     {
                         Name = value.Name,
                         Id = value.Id,
+                        BrandId = value.BrandId,
+                        WeaponId=value.WeaponId,
+                        BasePrice = value.BasePrice,
                         
                     };
                     OnPropertyChanged();

@@ -21,18 +21,11 @@ namespace ZNJXL9_HFT_2021221.Models
 
         public int? BasePrice { get; set; }
 
-
-        [NotMapped]
-        [JsonIgnore]
-        public virtual Brand Brand { get; set; }
-
+        public virtual Brand Brand { get; set; }        
         [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
-
-        [NotMapped]
-        [JsonIgnore]
-        public virtual Weapon Weapon { get; set; }
-
+   
+        public virtual Weapon Weapon { get; set; }        
         [ForeignKey(nameof(Weapon))]
         public int WeaponId { get; set; }
 

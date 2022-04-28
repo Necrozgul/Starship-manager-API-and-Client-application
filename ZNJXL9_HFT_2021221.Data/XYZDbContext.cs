@@ -29,18 +29,21 @@ namespace ZNJXL9_HFT_2021221.Data
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            
             mb.Entity<Starship>(entity =>
             {
                 entity.HasOne(starship => starship.Brand)
                     .WithMany(brand => brand.Starships)
                     .HasForeignKey(starship => starship.BrandId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    ;
+                    .OnDelete(DeleteBehavior.Restrict);
+                    
                 entity.HasOne(starship => starship.Weapon)
                     .WithMany(weapon => weapon.Starships)
                     .HasForeignKey(starship => starship.WeaponId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+            
+            
 
             Brand cec = new Brand() { Id = 1, Name = "CEC" };
             Brand cygnus = new Brand() { Id = 2, Name = "Cygnus" };
@@ -58,11 +61,12 @@ namespace ZNJXL9_HFT_2021221.Data
             Starship cygnusXwing = new Starship() { Id = 5, BrandId = cygnus.Id, BasePrice = 20, Name = "XWing", WeaponId = Flacgun.Id };
             Starship cygnusT4a = new Starship() { Id = 6, BrandId = cygnus.Id, BasePrice = 250, Name = "T-4A", WeaponId = Turbolaser.Id };
 
-            mb.Entity<Starship>().HasData(kuatEclipse, kuatExecutor, cecYV666, cecVCX100, cygnusXwing, cygnusT4a);
+            
             mb.Entity<Brand>().HasData(cec,cygnus,kuat);
             mb.Entity<Weapon>().HasData(Turbolaser,Flacgun,Protonbeambannon,Orbitalautocannon);
-            
-            
+            mb.Entity<Starship>().HasData(kuatEclipse, kuatExecutor, cecYV666, cecVCX100, cygnusXwing, cygnusT4a);
+
+
         }
     }
 }

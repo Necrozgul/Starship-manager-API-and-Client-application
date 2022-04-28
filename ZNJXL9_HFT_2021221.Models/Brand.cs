@@ -16,13 +16,9 @@ namespace ZNJXL9_HFT_2021221.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-
+        
         [NotMapped]
-        [JsonIgnore]
-        public virtual ICollection<Starship> Starships { get; set; }
-        public Brand()
-        {
-            Starships = new HashSet<Starship>();
-        }
+        [JsonIgnore]        
+        public virtual IList<Starship> Starships { get; set; }
     }
 }

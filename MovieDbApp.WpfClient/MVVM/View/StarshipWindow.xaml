@@ -24,12 +24,12 @@
         <StackPanel Grid.Column="1">
             <Label Content="Name" Background="LightBlue" Padding="1" />
             <TextBox Text="{Binding SelectedStarship.Name}" Padding="5" Margin="0,0,0,5" />
-            <Label Content="BasePrice" Background="LightBlue" Padding="1" />
+            <Label Content="Price" Background="LightBlue" Padding="1" />
             <TextBox Text="{Binding SelectedStarship.BasePrice}" Padding="5" Margin="0,0,0,5" />
             <Label Content="BrandId" Background="LightBlue" Padding="1" />
-            <TextBox Text="{Binding SelectedStarship.Brand.Name}" Padding="5" Margin="0,0,0,5" />
+            <TextBox Text="{Binding SelectedStarship.BrandId}" Padding="5" Margin="0,0,0,5" />
             <Label Content="WeaponId" Background="LightBlue" Padding="1" />
-            <TextBox Text="{Binding SelectedStarship.Weapon.Name}" Padding="5" Margin="0,0,0,5" />
+            <TextBox Text="{Binding SelectedStarship.WeaponId}" Padding="5" Margin="0,0,0,5" />
             <Button Content="Create" Command="{Binding CreateStarshipCommand}" Margin="10" Padding="10" />
             <Button Content="Delete" Command="{Binding DeleteStarshipCommand}" Margin="10" Padding="10" />
             <Button Content="Update" Command="{Binding UpdateStarshipCommand}" Margin="10" Padding="10" />
