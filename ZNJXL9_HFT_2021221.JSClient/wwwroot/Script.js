@@ -1,4 +1,5 @@
-﻿let actors = [];
+﻿let starships = [];
+let starshipIdToUpdate = -1;
 let connection = null;
 getdata();
 setupSignalR();
@@ -44,7 +45,7 @@ async function getdata() {
     await fetch('http://localhost:53910/starship')
         .then(x => x.json())
         .then(y => {
-            actors = y;
+            starships = y;
             //console.log(actors);
             display();
         });
@@ -52,15 +53,15 @@ async function getdata() {
 
 function display() {
     document.getElementById('resultarea').innerHTML = "";
-    actors.forEach(t => {
+    starships.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
                 + t.name + "</td><td>" +
                 + t.basePrice + "</td><td>" +
                 + t.brandId + "</td><td>" +
                 + t.weaponId + "</td><td>" +
-            `<button type="button" onclick="remove(${t.id})">Delete</button>`
-            + "</td></tr>";
+        `<button type="button" onclick="remove(${t.id})">Delete</button>` +
+        `<button type="button" onclick="showUpdate(${t.id})">Update</button>`
     });
 }
 
@@ -97,5 +98,35 @@ function create() {
         })
         .catch((error) => { console.error('Error:', error); });
 
+}
+
+function update() {    
+    let name = document.getElementById('starshipname_update').value;
+    let price = document.getElementById('starshipprice_update').value;
+    let brandid = document.getElementById('brandid_update').value;
+    let weaponid = document.getElementById('weaponid_update').value;
+    fetch('http://localhost:53910/starship/', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { id: starshipIdToUpdate, name: name, basePrice: price, brandId: brandid, weaponId: weaponid })
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+
+}
+
+function showUpdate(id) {
+    document.getElementById('starshipname_update').value = starships.find(t => t['id'] == id)['name'];
+    document.getElementById('starshipprice_update').value = starships.find(t => t['id'] == id)['basePrice'];
+    document.getElementById('brandid_update').value = starships.find(t => t['id'] == id)['brandId'];
+    document.getElementById('weaponid_update').value = starships.find(t => t['id'] == id)['weaponId'];
+    document.getElementById('updateformdiv').style.display = 'flex';
+    starshipIdToUpdate = id;
+    
 }
 
