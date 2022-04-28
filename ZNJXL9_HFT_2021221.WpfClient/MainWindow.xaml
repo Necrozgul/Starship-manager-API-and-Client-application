@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ZNJXL9_HFT_2021221.WpfClient"
         xmlns:viewModel="clr-namespace:ZNJXL9_HFT_2021221.WpfClient.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="Actor Editor" Height="450" Width="800">
+        Title="Menu" Height="450" Width="800">
     <Window.DataContext>
         <viewModel:MainWindowViewModel />
     </Window.DataContext>

@@ -1,0 +1,101 @@
+﻿let actors = [];
+let connection = null;
+getdata();
+setupSignalR();
+
+
+function setupSignalR() {
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:53910/hub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    connection.on("ActorCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("ActorDeleted", (user, message) => {
+        getdata();
+    });
+
+    connection.on("ActorUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.onclose(async () => {
+        await start();
+    });
+    start();
+
+
+}
+
+async function start() {
+    try {
+        await connection.start();
+        console.log("SignalR Connected.");
+    } catch (err) {
+        console.log(err);
+        setTimeout(start, 5000);
+    }
+};
+
+async function getdata() {
+    await fetch('http://localhost:53910/starship')
+        .then(x => x.json())
+        .then(y => {
+            actors = y;
+            //console.log(actors);
+            display();
+        });
+}
+
+function display() {
+    document.getElementById('resultarea').innerHTML = "";
+    actors.forEach(t => {
+        document.getElementById('resultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>"
+                + t.name + "</td><td>" +
+                + t.basePrice + "</td><td>" +
+                + t.brandId + "</td><td>" +
+                + t.weaponId + "</td><td>" +
+            `<button type="button" onclick="remove(${t.id})">Delete</button>`
+            + "</td></tr>";
+    });
+}
+
+function remove(id) {
+    fetch('http://localhost:53910/starship/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+        body: null
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+
+}
+
+function create() {
+    let name = document.getElementById('starshipname').value;
+    let price = document.getElementById('starshipprice').value;
+    let brandid = document.getElementById('brandid').value;
+    let weaponid = document.getElementById('weaponid').value;
+    fetch('http://localhost:53910/starship/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { name: name, basePrice: price,brandId: brandid, weaponId: weaponid})
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+
+}
+
