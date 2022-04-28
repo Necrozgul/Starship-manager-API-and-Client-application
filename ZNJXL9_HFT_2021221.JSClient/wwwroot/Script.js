@@ -117,6 +117,8 @@ function update() {
             getdata();
         })
         .catch((error) => { console.error('Error:', error); });
+    alert("Update was succesfull")
+    hideUpdate();
 
 }
 
@@ -125,8 +127,18 @@ function showUpdate(id) {
     document.getElementById('starshipprice_update').value = starships.find(t => t['id'] == id)['basePrice'];
     document.getElementById('brandid_update').value = starships.find(t => t['id'] == id)['brandId'];
     document.getElementById('weaponid_update').value = starships.find(t => t['id'] == id)['weaponId'];
+    document.getElementById('formdiv').style.display = 'none';
     document.getElementById('updateformdiv').style.display = 'flex';
     starshipIdToUpdate = id;
     
+}
+
+function hideUpdate() {
+    document.getElementById('starshipname_update').value = null;
+    document.getElementById('starshipprice_update').value = null;
+    document.getElementById('brandid_update').value = null;
+    document.getElementById('weaponid_update').value = null;
+    document.getElementById('updateformdiv').style.display = 'none';
+    document.getElementById('formdiv').style.display = 'flex';
 }
 
